@@ -69,7 +69,7 @@ while index < length(y)
     j = j + 1;
     index = index + 1;
 end
-% Compute standard deviation of every non-clap sample.
+% Compute standard deviation of every non-clap sample in the data.
 standarddev = std(clapless);
 % Compute Z-score and store it into copy.
 cpy = cpy / standarddev;
