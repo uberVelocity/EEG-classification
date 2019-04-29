@@ -181,9 +181,9 @@ disp("total significant points:");
 disp(sigcnt);
 
 % Label as significant the generated +-2 second values.
-for index = 1:length(generated_manual_times_1a_int)
-    total_results(generated_manual_times_1a_int(index)) = 1;
-end
+%for index = 1:length(generated_manual_times_1a_int)
+%    total_results(generated_manual_times_1a_int(index)) = 1;
+%end
 
 % Compute true positives.
 tp = 0;
