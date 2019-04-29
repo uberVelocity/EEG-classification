@@ -1,4 +1,4 @@
-[y,Fs] = audioread("challengerdefender4.MOV");  % Read audio file.
+[y,Fs] = audioread("challengerdefender1.MOV");  % Read audio file.
 y = y(:, 1);  % Reduce data to half since we do not have two channels.
 cpy = y;  % Copy data for safe-keeping.
 [peaks, locs] = findpeaks(y, Fs, "MinPeakHeight", 0.9, "MinPeakDistance", 0.5);  % Determine claps.
@@ -10,6 +10,7 @@ thresholdzscore = 4.57;
 [tf, loc] = ismember(locs, t);
 skip = 5000;  % Amount of samples to skip (peaks) determined by the duration of a clap.
 % Plot figure of claps intervals (they start with green - end with red).
+
 figure(2);
 hold on;
 plot(t,y);
@@ -73,10 +74,13 @@ end
 standarddev = std(clapless);
 % Compute Z-score and store it into copy.
 cpy = cpy / standarddev;
+
+% Plot the z-score of every sample.
 figure(3);
 plot(t, cpy);
-cnt = 0;
+
 % Count how many significant locations exist.
+cnt = 0;
 for index = 1:length(cpy)
     if cpy(index) >= thresholdzscore 
         cnt = cnt + 1;
@@ -126,17 +130,106 @@ while index < length(cpy)
     index = index + 1;
 end
 
-% Store in times that you have found to be arousal in common with Michelle.
+% Store in times that you have found to be anger without Michelle.
 manual_times_4a = [123, 129, 138, 232, 253, 261, 283, 478, 512];
 manual_times_1a = [254, 266, 358, 365, 396, 464, 475, 497, 499, 504, 534, 537, 538, 550, 552, 554, 583, 593, 594, 625, 665, 692, 699];
-% Store logical vector checking whether those values are in the significant
-% values found by the program.
-matching_4a = ismember(manual_times_4a, fix(sigtimes));
-matching_1a = ismember(manual_times_1a, fix(sigtimes));
-% Display whether numbers in manually inputted vector matched the ones
-% found by the program.
-disp(matching_4a);
-disp(matching_1a);
+
+% Store in intersected times found with Michelle.
+manual_times_1a_int = [254, 363, 396, 528, 551, 593, 690];
+manual_times_2_int = [280, 292, 340, 442, 588, 605];
+manual_times_3_int = [398, 523, 588];
+
+% Account for +-2 seconds by generating vector of values found in initial
+% vector +- 2 seconds.
+generated_manual_times_1a_int = inrange2(manual_times_1a_int);
+generated_manual_times_2_int = inrange2(manual_times_2_int);
+generated_manual_times_3_int = inrange2(manual_times_3_int);
+
+% Check whether the values that the program found correspond to the values
+% that we found.
+matching_times_1a_int = ismember(generated_manual_times_1a_int, fix(sigtimes));
+matching_times_2_int = ismember(generated_manual_times_2_int, fix(sigtimes));
+matching_times_3_int = ismember(generated_manual_times_3_int, fix(sigtimes));
+
+% Reduce the vector down to original values.
+final_matching_times_1a = checktimes(matching_times_1a_int);
+final_matching_times_2 = checktimes(matching_times_2_int);
+final_matching_times_3 = checktimes(matching_times_3_int);
+
+% Compute true positive rate of intersected times:
+accuracy = sum(final_matching_times_1a) / length(final_matching_times_1a);
+disp("accuracy_intersected_1a");
+disp(accuracy);
+disp(final_matching_times_1a);
+
+accuracy = sum(final_matching_times_2) / length(final_matching_times_2);
+disp("accuracy_intersected_2");
+disp(accuracy);
+disp(final_matching_times_2);
+
+accuracy = sum(final_matching_times_3) / length(final_matching_times_3);
+disp("accuracy_intersected_3");
+disp(accuracy);
+disp(final_matching_times_3);
+
+% Compute significance at every second.
+total_results = ismember(1:fix(max(sigtimes)), fix(sigtimes));
+
+% Compute how many points are significant.
+totalcnt = sum(total_results);
+disp("total significant points:");
+disp(sigcnt);
+
+% Label as significant the generated +-2 second values.
+for index = 1:length(generated_manual_times_1a_int)
+    total_results(generated_manual_times_1a_int(index)) = 1;
+end
+
+% Compute true positives.
+tp = 0;
+for index = 1:length(total_results)
+    if (total_results(index) == 1 && ismember(index, generated_manual_times_1a_int))
+        tp = tp + 1;
+    end
+end
+disp("true positives");
+disp(tp);
+
+% Compute false positives (should also check if it's in range of +-2 seconds).
+fp = 0;
+for index = 1:length(total_results)
+    if (total_results(index) == 1 && ~ismember(index, generated_manual_times_1a_int))
+        fp = fp + 1;
+    end
+end
+disp("false positives");
+disp(fp);
+
+% Compute false negatives.
+fn = 0;
+for index = 1:length(total_results)
+    if (total_results(index) == 0 && ismember(index, generated_manual_times_1a_int))
+        fn = fn + 1;
+        disp("total_results(index)");
+        disp("index");
+        disp(total_results(index));
+        disp(index);
+    end
+end
+disp("false negatives");
+disp(fn);
+
+% Compute true negatives.
+tn = 0;
+for index = 1:length(total_results)
+    if (total_results(index) == 0 && ~ismember(index, generated_manual_times_1a_int))
+        tn = tn + 1;
+    end
+end
+disp("true negatives");
+disp(tn);
+
+
 % IMPORTANT: We are comparing whether the values that we have found to be
 % ANGER are found by the program to be AROUSAL. Since anger is a subset of
 % arousal, a value found by the program to be arousal that is not found in
@@ -146,19 +239,4 @@ disp(matching_1a);
 % not correspond to an angry emotion within that specified time.
 
 
-% Display the output false positives - To be done after EEG analysis.
 
-% If we want to still compare the manual_times to the significant times
-% found by the program and compute the confusion matrix we need to see how
-% many true negatives, true positives, false positives and false negatives we have.
-
-% Compute significance at every second.
-total_results = ismember(1:fix(max(sigtimes)), fix(sigtimes));
-
-% Compute how many points are significant.
-totalcnt = sum(total_results);
-
-
-
-disp("this many significance");
-disp(sigcnt);
