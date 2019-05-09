@@ -5,7 +5,7 @@ cpy = y;  % Copy data for safe-keeping.
 % Convert from samples to time in order to extract correct index of peak.
 samples = 0:length(y)-1;
 t = samples/Fs;
-thresholdzscore = 4.57;
+thresholdzscore = 5.5;
 % Extract correct indices in vector loc.
 [tf, loc] = ismember(locs, t);
 skip = 5000;  % Amount of samples to skip (peaks) determined by the duration of a clap.
@@ -130,31 +130,31 @@ while index < length(cpy)
     index = index + 1;
 end
 
-% Store in times that you have found to be anger without Michelle.
+% Store in times that Mihai found to be anger.
 manual_times_4a = [123, 129, 138, 232, 253, 261, 283, 478, 512];
 manual_times_1a = [254, 266, 358, 365, 396, 464, 475, 497, 499, 504, 534, 537, 538, 550, 552, 554, 583, 593, 594, 625, 665, 692, 699];
 
-% Store in intersected times found with Michelle.
+% Store in intersected times found by raters.
 manual_times_1a_int = [254, 363, 396, 528, 551, 593, 690];
 manual_times_2_int = [280, 292, 340, 442, 588, 605];
 manual_times_3_int = [398, 523, 588];
 
 % Account for +-2 seconds by generating vector of values found in initial
 % vector +- 2 seconds.
-generated_manual_times_1a_int = inrange2(manual_times_1a_int);
-generated_manual_times_2_int = inrange2(manual_times_2_int);
-generated_manual_times_3_int = inrange2(manual_times_3_int);
+%generated_manual_times_1a_int = inrange2(manual_times_1a_int);
+%generated_manual_times_2_int = inrange2(manual_times_2_int);
+%generated_manual_times_3_int = inrange2(manual_times_3_int);
 
 % Check whether the values that the program found correspond to the values
 % that we found.
-matching_times_1a_int = ismember(generated_manual_times_1a_int, fix(sigtimes));
-matching_times_2_int = ismember(generated_manual_times_2_int, fix(sigtimes));
-matching_times_3_int = ismember(generated_manual_times_3_int, fix(sigtimes));
+matching_times_1a_int = ismember(manual_times_1a_int, fix(sigtimes));
+matching_times_2_int = ismember(manual_times_2_int, fix(sigtimes));
+matching_times_3_int = ismember(manual_times_3_int, fix(sigtimes));
 
-% Reduce the vector down to original values.
-final_matching_times_1a = checktimes(matching_times_1a_int);
-final_matching_times_2 = checktimes(matching_times_2_int);
-final_matching_times_3 = checktimes(matching_times_3_int);
+% Store the values in a different variable.
+final_matching_times_1a = matching_times_1a_int;
+final_matching_times_2 = matching_times_2_int;
+final_matching_times_3 = matching_times_3_int;
 
 % Compute true positive rate of intersected times:
 accuracy = sum(final_matching_times_1a) / length(final_matching_times_1a);
@@ -173,7 +173,7 @@ disp(accuracy);
 disp(final_matching_times_3);
 
 % Compute significance at every second.
-total_results = ismember(1:fix(max(sigtimes)), fix(sigtimes));
+total_results = ismember(1:fix(max(t)), fix(sigtimes));
 
 % Compute how many points are significant.
 totalcnt = sum(total_results);
@@ -188,17 +188,18 @@ disp(sigcnt);
 % Compute true positives.
 tp = 0;
 for index = 1:length(total_results)
-    if (total_results(index) == 1 && ismember(index, generated_manual_times_1a_int))
+    if (total_results(index) == 1 && ismember(index, manual_times_1a_int))
+        disp(index);
         tp = tp + 1;
     end
 end
 disp("true positives");
 disp(tp);
 
-% Compute false positives (should also check if it's in range of +-2 seconds).
+% Compute false positives.
 fp = 0;
 for index = 1:length(total_results)
-    if (total_results(index) == 1 && ~ismember(index, generated_manual_times_1a_int))
+    if (total_results(index) == 1 && ~ismember(index, manual_times_1a_int))
         fp = fp + 1;
     end
 end
@@ -208,12 +209,8 @@ disp(fp);
 % Compute false negatives.
 fn = 0;
 for index = 1:length(total_results)
-    if (total_results(index) == 0 && ismember(index, generated_manual_times_1a_int))
+    if (total_results(index) == 0 && ismember(index, manual_times_1a_int))
         fn = fn + 1;
-        disp("total_results(index)");
-        disp("index");
-        disp(total_results(index));
-        disp(index);
     end
 end
 disp("false negatives");
@@ -222,13 +219,12 @@ disp(fn);
 % Compute true negatives.
 tn = 0;
 for index = 1:length(total_results)
-    if (total_results(index) == 0 && ~ismember(index, generated_manual_times_1a_int))
+    if (total_results(index) == 0 && ~ismember(index, manual_times_1a_int))
         tn = tn + 1;
     end
 end
 disp("true negatives");
 disp(tn);
-
 
 % IMPORTANT: We are comparing whether the values that we have found to be
 % ANGER are found by the program to be AROUSAL. Since anger is a subset of
@@ -237,6 +233,50 @@ disp(tn);
 % solution, since it still may be anger. It constitutes as a false positive
 % only when we can determine by means of EEG that the brian activity does
 % not correspond to an angry emotion within that specified time.
+
+% FP1 FP2 - Indices: 1, 2
+% F3 F4 - Indices: 4, 6
+k = 0;
+figure(10);
+c = 0.0;
+plot(c);
+hold on;
+for i = 1:620
+   c = data_iccleanedA.trial{1,i};
+   plot(c(1,:));
+end
+
+% Compute oscillatory power for the challenger in video 1. Look at 
+% alpha (8:12), beta(12.5:30) and theta(4:7) waves 
+cfg = [];
+cfg.method = 'mtmconvol';
+cfg.taper = 'dpss';
+cfg.tapsmofrq = 2;
+% cfg.channel = 'Fp1_B';
+cfg.output = 'pow';
+cfg.trials = 'trials';
+cfg.keeptrials = 'yes';
+cfg.foi = [4:50];
+cfg.t_ftimwin = ones(length(cfg.foi),1).*0.5;
+cfg.toi = [-0.5:0.05:1];
+challenger1 = ft_freqanalysis(cfg,data_iccleanedB);
+TFRhigh = ft_freqanalysis(cfg,hpdat);
+
+cfg = [];
+cfg.baselinetype = 'absolute';
+cfg.showlabels = 'yes';
+cfg.layout = 'easycapM25.mat';
+cfg.showoutline = 'yes';
+ft_multiplotTFR(cfg,challenger1);
+
+
+TFRhigh = ft_freqanalysis(cfg,hpdat);
+cfg = [];
+cfg.baseline = [];
+cfg.baselinetype = 'absolute';
+cfg.showlabels = 'yes';
+cfg.showoutline = 'yes';
+
 
 
 
