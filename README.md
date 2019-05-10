@@ -24,3 +24,7 @@ Better solution is to:
 4. If the values are false, add in a new vector at a pointer whose value increments only in this if statement the value at the index position.
 ![](clap_intervals.png)
 When computing the average in order to normalize the data and compute its z-score, the clapping values should not be removed since that would shift the EEG data. Better is to give it a value which does not influence the loudness (0 probably but if clippings are also 0 values then we have a problem) and count how many there are. Subtract the number over which you divide by this counter to not count the claps in the average.
+
+#### Comparison between anger and non-anger moments of Channel FP1 for Alpha waves.
+![](fp1anger.png)
+![](fp1nonanger.png)
