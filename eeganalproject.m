@@ -29,26 +29,37 @@ pows = freqdesc.powspctrm;
 % Stores every value of FP1 electrode.
 fp1 = pows(:,1,:,:);
 
-
 % Produces a vector filled with the frequencies (,,X,) and times (,,,X).
 % This is what you are interested in observing.
-peaceTime = 91;
-angerTime = 158;
+peaceTime = 182;
+angerTime = 182;
 
 % Reduces 1-sized dimension to convert matrix from 4D to 2D.
-squeezedAnger = squeeze(pows(angerTime,1,:,:));
+squeezedAnger = squeeze(pows(angerTime,2,:,:));
 squeezedPeace = squeeze(pows(peaceTime,1,:,:));
 
 % Compute average of the 
-averageSqueezedAnger = mean(squeezedAnger);
-averageSqueezedPeace = mean(squeezedPeace);
+averageSqueezedAnger = nanmean(squeezedAnger);
+averageSqueezedPeace = nanmean(squeezedPeace);
 
-cnt = sum(averageSqueezedAnger > averageSqueezedPeace);
+flippedSqAng = averageSqueezedAnger';
+flippedSqPeac = averageSqueezedPeace';
 
 % Compute mean of intersected times of the conditions excluding NaN values
 % for statistics.
-ang = nanmean(averageSqueezedAnger);
-peac = nanmean(averageSqueezedPeace);
+ang = nanmean(flippedSqAng);
+peac = nanmean(flippedSqPeac);
+
+% Group the variables for comparison using boxplots.
+group = [ones(size(flippedSqAng)); 2 * ones(size(flippedSqPeac))];
+
+% Plot boxplot for comparison.
+figure
+boxplot([flippedSqAng; flippedSqPeac],group);
+title('FP2 Alpha - [1,2]');
+ylabel('Power');
+set(gca,'XTickLabel',{'anger','peace'});
+
 
 % Plot the channel, displaying the two conditions.
 figure(10);
@@ -56,27 +67,10 @@ plot(squeezedAnger);
 figure(11);
 plot(squeezedPeace);
 
-% Use other variables to store the same information in squeezeAnger and
-% squeezePeace.
-angfp1 = squeeze(pows(angerTime, 1, :, :));
-peacfp1 = squeeze(pows(peaceTime, 1, :, :));
-
-% Take only the first frequency of the conditions. (9Hz in our case).
-angfp1_1 = squeeze(angfp1(1,:))';
-peacfp1_1 = squeeze(peacfp1(1,:))';
-
-% Group the variables for comparison using boxplots.
-group = [ones(size(angfp1_1)); 2 * ones(size(peacfp1_1))];
-
-% Plot boxplot for comparison.
-figure
-boxplot([angfp1_1; peacfp1_1],group);
-set(gca,'XTickLabel',{'angfp1','peacfp1'});
-
 % Perform t-test for the two conditions.
 % h = [1, 0] = [rejects h, ~rejects h].
 % p = p-value (significance :=  p <= 0.05).
-[h,p] = ttest2(angfp1_1, peacfp1_1);
+[h,p] = ttest2(averageSqueezedAnger, averageSqueezedPeace);
 sprintf("h = %d", h)
 if p <= 0.05
     sprintf("p = %.3f * ", p)
