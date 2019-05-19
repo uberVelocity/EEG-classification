@@ -6,6 +6,7 @@ B - CHALLENGER
 1, 1:02
 2, 0:32
 3, 0:14
+5, 2:57
 
 New Times
 [video, time]
@@ -40,6 +41,17 @@ Actual value to plug in angerTimes
 3, 268, 54
 3, 301, 64
 
+5, 159, 99
+5, 223, 123
+5, 226, 110
+5, 228, 103
+5, 238, 271
+5, 262, 410
+5, 306, 151
+5, 369, 95
+5, 390, 345
+5, 417, 164
+
 Debate 1, Alpha, FP1-FP2, Challenger
 Avg anger: 12.8973
 Avg non-anger: 10.7466
@@ -51,3 +63,7 @@ Avg non-anger: -6.3562
 Debate 3, Alpha, FP1-FP2, Challenger
 Avg anger: -32.2820 % Oh no
 Avg peace: -7.7622
+
+Debate 5, Alpha, FP1-FP2, Challenger
+Avg anger: 0.4829
+Avg peace: 0.2143
