@@ -29,13 +29,25 @@ Actual value to plug in angerTimes
 1, 327, 80
 1, 376, 80
 
-2, 156,
-2, 162,
-2, 186,
-2, 237,
-2, 310,
-2, 318,
+2, 156, 30
+2, 162, 52
+2, 186, 96
+2, 237, 272
+2, 310, 123
+2, 318, 51
 
-3, 206
-3, 268
-3, 301
+3, 206, 14
+3, 268, 54
+3, 301, 64
+
+Debate 1, Alpha, FP1-FP2, Challenger
+Avg anger: 12.8973
+Avg non-anger: 10.7466
+
+Debate 2, Alpha, FP1-FP2, Challenger
+Avg anger: 31.8603 % AWWWWWWWWW YEAAAAAAAAAAAH
+Avg non-anger: -6.3562
+
+Debate 3, Alpha, FP1-FP2, Challenger
+Avg anger: -32.2820 % Oh no
+Avg peace: -7.7622

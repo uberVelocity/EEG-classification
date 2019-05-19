@@ -1,47 +1,41 @@
+%#ok<*NOPTS>
+% Import and activate fieldtrip library.
+addpath('C:\Users\redth\Documents\University\Bachelor\fieldtrip-20181231');
+ft_defaults;
+
+% Load electrodes, frequency intervals, and debate times.
+load('elec_freq');
+load('debate_1_times');
+load('debate_1_times_peace');
+load('debate_2_times');
+load('debate_2_times_peace');
+load('debate_3_times');
+load('debate_3_times_peace');
+
 % Compute power oscillation of EEG data.
-cfg = [];
-cfg.output = 'pow';
-cfg.channel = 'all';
-cfg.method = 'mtmconvol';
-cfg.taper = 'dpss';
-cfg.tapsmofrq = 2;
-cfg.foi = 9:13;
-cfg.keeptrials = 'yes';
-cfg.t_ftimwin = ones(length(cfg.foi),1).*0.5;
-cfg.toi = 0:0.05:2;
-TFRiccleanedB = ft_freqanalysis(cfg, data_iccleanedB);
+[TFRiccleanedB, cfg] = fieldanalfn(alpha, data_iccleanedB);
 
 % Compute freq descriptives of result.
 [freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedB);
 
 % Multiplot freqdesc.
-cfg = [];
-cfg.baseline = [];
-cfg.baselinetype = 'absolute';
-cfg.showlabels = 'yes';
-cfg.showoutline = 'yes';
-cfg.layout = 'elec1010B.lay';
-ft_multiplotTFR(cfg, freqdesc);
+multiplt(freqdesc);
 
 % Store the powscptrm for easy access.
 pows = freqdesc.powspctrm;
 
-% Stores every value of FP1 electrode.
-fp1 = pows(:,1,:,:);
+% Compute average difference between conditions.
+avg_diff_anger = comp(debate_3_times, FP1, FP2, pows);
+avg_diff_peace = comp(debate_3_times_peace, FP1, FP2, pows);
 
-% Produces a vector filled with the frequencies (,,X,) and times (,,,X).
-% This is what you are interested in observing.
-peaceTime = 182;
-angerTime = 182;
+% Mean anger vs mean non-anger
+mean_anger = mean(avg_diff_anger);
+mean_peace = mean(avg_diff_peace);
 
-% Reduces 1-sized dimension to convert matrix from 4D to 2D.
-squeezedAnger = squeeze(pows(angerTime,2,:,:));
-squeezedPeace = squeeze(pows(peaceTime,1,:,:));
+mean_anger 
+mean_peace
 
-% Compute average of the 
-averageSqueezedAnger = nanmean(squeezedAnger);
-averageSqueezedPeace = nanmean(squeezedPeace);
-
+% Flips anger and non-anger vectors to plot boxplots.
 flippedSqAng = averageSqueezedAnger';
 flippedSqPeac = averageSqueezedPeace';
 
@@ -56,9 +50,9 @@ group = [ones(size(flippedSqAng)); 2 * ones(size(flippedSqPeac))];
 % Plot boxplot for comparison.
 figure
 boxplot([flippedSqAng; flippedSqPeac],group);
-title('FP2 Alpha - [1,2]');
+title('F4: Anger vs Non-Anger');
 ylabel('Power');
-set(gca,'XTickLabel',{'anger','peace'});
+set(gca,'XTickLabel',{'anger','non-anger'});
 
 
 % Plot the channel, displaying the two conditions.
