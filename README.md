@@ -5,7 +5,7 @@
 Intersected times of anger / non-anger are in debate_X_times.m / debate_X_times_peace.m. The electrodes and frequency specifications are in elec_freq.m.
 
 1. Activate Fieldtrip by adding its path to your current working directory and running ft_defaults:
-```matlab
+```Matlab
 addpath('fieldtrip\directory');
 ft_defaults;
 ```
