@@ -65,5 +65,39 @@ Avg anger: -32.2820 % Oh no
 Avg peace: -7.7622
 
 Debate 5, Alpha, FP1-FP2, Challenger
-Avg anger: 0.4829
-Avg peace: 0.2143
+Avg anger: 0.8184
+Avg peace: 0.2177
+
+
+Debate 1, Theta, FP1-FP2, Challenger
+Avg anger: -34.6979
+Avg peace: -18.2063
+
+Debate 2, Theta, FP1-FP2, Challenger
+Avg anger: 446.4637
+Avg peace: -31.6605
+
+Debate 3, Theta, FP1-FP2, Challenger
+Avg anger: 10.5093
+Avg peace: -4.9417
+
+Debate 5, Theta, FP1-FP2, Challenger
+Avg anger: 11.8083
+Avg peace: 31.0217
+
+
+Debate 1, Beta, FP1-FP2, Challenger
+Avg anger: 13.3079
+Avg peace: 7.1506
+
+Debate 2, Beta, FP1-FP2, Challenger
+Avg anger: 20.1576 
+Avg peace: -2.8539
+
+Debate 3, Beta, FP1-FP2, Challenger
+Avg anger: -6.1160
+Avg peace: -3.2184
+
+Debate 5, Beta, FP1-FP2, Challenger
+Avg anger: 5.3612
+Avg peace: 2.6482

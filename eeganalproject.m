@@ -14,7 +14,7 @@ load('debate_3_times_peace');
 load('debate_5_times');
 load('debate_5_times_peace');
 % Compute power oscillation of EEG data.
-[TFRiccleanedB, cfg] = fieldanalfn(alpha, data_iccleanedB);
+[TFRiccleanedB, cfg] = fieldanalfn(beta, data_iccleanedB);
 
 % Compute freq descriptives of result.
 [freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedB);
@@ -44,7 +44,6 @@ flippedSqPeac = averageSqueezedPeace';
 % for statistics.
 ang = nanmean(flippedSqAng);
 peac = nanmean(flippedSqPeac);
-
 % Group the variables for comparison using boxplots.
 group = [ones(size(flippedSqAng)); 2 * ones(size(flippedSqPeac))];
 
