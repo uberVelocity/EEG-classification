@@ -4,6 +4,7 @@ addpath('C:\Users\redth\Documents\University\Bachelor\fieldtrip-20181231');
 ft_defaults;
 
 % Load electrodes, frequency intervals, and debate times.
+addpath('C:\Users\redth\Documents\University\Bachelor\git\bachelor-project\data_files');
 load('elec_freq');
 load('debate_1_times');
 load('debate_1_times_peace');
