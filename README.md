@@ -1,5 +1,19 @@
 # Bachelor project 
 
+## INSTRUCTIONS
+
+Intersected times of anger / non-anger are in debate_X_times.m / debate_X_times_peace.m. The electrodes and frequency specifications are in elec_freq.m.
+
+1. Activate Fieldtrip by adding its path to your current working directory and running ft_defaults:
+```Matlab
+addpath('fieldtrip\directory');
+ft_defaults;
+```
+2. Computing the oscillatory power of all sites for a frequency can be done with the function `fieldanalfn(freq, data`).
+3. Computing the average power of anger / non-anger conditions can be done with the function `comp('debate_X_times', elec1, elec2, pows)`
+The averages are displayed in console. Currently, the `comp()` function gives you the difference between elec1 and elec2 in terms of average power.
+4. After computing every average of every debate, the results of the two conditions are put in seperate vectors. Boxplots of the two vectors are created and the p-value is computed.
+
 ## Detect average loudness of voice and detect voice above threshold
 An automated way in which anger might be detected is by using loudness as an indication of anger. By extracting just the voice of the monk from the audio file and computing how many standard deviations the voice is from the average (z-score) one can have an intuition whether a monk is feeling angry. How many deviations it needs to be is still a matter of discussion.
 
