@@ -1,12 +1,12 @@
-avg_anger = [13.3079 20.1576 -6.1160 5.3612];
-avg_non_anger = [7.1506 -2.8539 -3.2184 2.6482];
+avg_anger = [4.6706 25.0660 6.8289 -11.0169]';
+avg_non_anger = [6.1363 -1.6169 15.8162 -11.3773]';
 
-group = [ones(size(avg_anger))'; 2 * ones(size(avg_non_anger))'];
+group = [ones(size(avg_anger)); 2 * ones(size(avg_non_anger))];
 
 figure
 boxplot([avg_anger; avg_non_anger],group);
-title('Challenger FP1 - FP2 across debates');
-ylabel('Average Power FP1 - FP2');
+title('Challenger T8 - T7 across debates');
+ylabel('Average Power T8 - T7');
 set(gca,'XTickLabel',{'anger','non-anger'});
 
 [h,p] = ttest2(avg_anger, avg_non_anger);

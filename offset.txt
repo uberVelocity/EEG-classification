@@ -101,3 +101,105 @@ Avg peace: -3.2184
 Debate 5, Beta, FP1-FP2, Challenger
 Avg anger: 5.3612
 Avg peace: 2.6482
+
+
+Debate 1, Alpha, F3-F4, Challenger
+Avg anger: 3.8180
+Avg peace: 2.7052
+
+Debate 2, Alpha, F3-F4, Challenger
+Avg anger: -9.1620
+Avg peace: -3.3224
+
+Debate 3, Alpha, F3-F4, Challenger
+Avg anger: -19.4168
+Avg peace: -5.5079
+
+Debate 5, Alpha, F3-F4, Challenger
+Avg anger: -0.1463
+Avg peace: -1.7260
+
+
+Debate 1, Theta, F3-F4, Challenger
+Avg anger: 9.8737
+Avg peace: 20.5308
+
+Debate 2, Theta, F3-F4, Challenger
+Avg anger: -71.7880
+Avg peace: -10.7527
+
+Debate 3, Theta, F3-F4, Challenger
+Avg anger: -34.6346
+Avg peace: -4.0576
+
+Debate 5, Theta, F3-F4, Challenger
+Avg anger: -14.7250
+Avg peace: -5.1884
+
+
+Debate 1, Beta, F3-F4, Challenger
+Avg anger: 2.6638
+Avg peace: 0.8313
+
+Debate 2, Beta, F3-F4, Challenger
+Avg anger: -7.9949
+Avg peace: -2.3826
+
+Debate 3, Beta, F3-F4, Challenger
+Avg anger: -19.1577
+Avg peace: -4.6690
+
+Debate 5, Beta, F3-F4, Challenger
+Avg anger: -0.3392
+Avg peace: -0.8085
+
+
+Debate 1, Alpha, T8-T7, Challenger
+Avg anger: 2.1412
+Avg peace: 3.4905
+
+Debate 2, Alpha, T8-T7, Challenger
+Avg anger: 35.3676
+Avg peace: -0.2431
+
+Debate 3, Alpha, T8-T7, Challenger
+Avg anger: 7.0924
+Avg peace: 3.8298
+
+Debate 5, Alpha, T8-T7, Challenger
+Avg anger: -3.5402
+Avg peace: -4.5845
+
+
+Debate 1, Theta, T8-T7, Challenger
+Avg anger: 0.1805
+Avg peace: 0.7148
+
+Debate 2, Theta, T8-T7, Challenger
+Avg anger: 132.3805
+Avg peace: -3.3894
+
+Debate 3, Theta, T8-T7, Challenger
+Avg anger: -3.3739
+Avg peace: 4.5064
+
+Debate 5, Theta, T8-T7, Challenger
+Avg anger: -5.0290
+Avg peace: -6.5694
+
+
+Debate 1, Beta, T8-T7, Challenger
+Avg anger: 4.6706
+Avg peace: 6.1363
+
+Debate 2, Beta, T8-T7, Challenger
+Avg anger: 25.0660
+Avg peace: -1.6169
+
+Debate 3, Beta, T8-T7, Challenger
+Avg anger: 6.8289
+Avg peace: 15.8162
+
+Debate 4, Beta, T8-T7, Challenger
+Avg anger: -11.0169
+Avg peace: -11.3773
