@@ -1,5 +1,15 @@
 # Bachelor project 
 
+## TODO:
+1. Recompute F4 - F3 for the challenger since they are currently flipped.
+2. Compose graphs grouped via frequency.
+3. Compose graphs by averaging frequencies.
+4. Finish 5th video analysis.
+5. Finish two challenger / two defender.
+6. Analyze 2C / 2D.
+7. Add 2C / 2D to graphs.
+8. Compare experienced vs non-experienced.
+
 ## INSTRUCTIONS
 
 Intersected times of anger / non-anger are in debate_X_times.m / debate_X_times_peace.m. The electrodes and frequency specifications are in elec_freq.m.
