@@ -24,19 +24,17 @@ load('debate_3_times_peace_defender');
 load('debate_5_times');
 load('debate_5_times_peace');
 % Compute power oscillation of EEG data.
-[TFRiccleanedA, cfg] = fieldanalfn(alpha, data_iccleanedA);
+[TFRiccleanedA, cfg] = fieldanalfn(beta, data_iccleanedA);
 
 % Compute freq descriptives of result.
 [freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedA);
-
-
 
 % Store the powscptrm for easy access.
 pows = freqdesc.powspctrm;
 
 % Compute average difference between conditions.
-avg_diff_anger = comp(debate_3_times_defender, FP1, FP2, pows);
-avg_diff_peace = comp(debate_3_times_peace_defender, FP1, FP2, pows);
+avg_diff_anger = comp(debate_1b_times_defender, FP1, FP2, pows);
+avg_diff_peace = comp(debate_1b_times_peace_defender, FP1, FP2, pows);
 
 % Mean anger vs mean non-anger
 mean_anger = mean(avg_diff_anger);
