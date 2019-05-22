@@ -2,33 +2,41 @@
 % Import and activate fieldtrip library.
 addpath('C:\Users\redth\Documents\University\Bachelor\fieldtrip-20181231');
 ft_defaults;
-
+T7 = 12;
+T8 = 16;
 % Load electrodes, frequency intervals, and debate times.
 addpath('C:\Users\redth\Documents\University\Bachelor\git\bachelor-project\data_files');
 load('elec_freq');
 load('debate_1_times');
+load('debate_1_times_defender');
 load('debate_1_times_peace');
+load('debate_1_times_peace_defender');
+load('debate_1b_times_defender');
+load('debate_1b_times_peace_defender');
 load('debate_2_times');
+load('debate_2_times_defender');
 load('debate_2_times_peace');
+load('debate_2_times_peace_defender');
 load('debate_3_times');
+load('debate_3_times_defender');
 load('debate_3_times_peace');
+load('debate_3_times_peace_defender');
 load('debate_5_times');
 load('debate_5_times_peace');
 % Compute power oscillation of EEG data.
-[TFRiccleanedB, cfg] = fieldanalfn(beta, data_iccleanedB);
+[TFRiccleanedA, cfg] = fieldanalfn(alpha, data_iccleanedA);
 
 % Compute freq descriptives of result.
-[freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedB);
+[freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedA);
 
-% Multiplot freqdesc.
-multiplt(freqdesc);
+
 
 % Store the powscptrm for easy access.
 pows = freqdesc.powspctrm;
 
 % Compute average difference between conditions.
-avg_diff_anger = comp(debate_5_times, FP1, FP2, pows);
-avg_diff_peace = comp(debate_5_times_peace, FP1, FP2, pows);
+avg_diff_anger = comp(debate_3_times_defender, FP1, FP2, pows);
+avg_diff_peace = comp(debate_3_times_peace_defender, FP1, FP2, pows);
 
 % Mean anger vs mean non-anger
 mean_anger = mean(avg_diff_anger);

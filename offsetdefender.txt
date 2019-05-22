@@ -1,0 +1,46 @@
+[Video, Offset]
+
+1, 1:02
+1b, 942 (seconds)
+2, 0:32
+3, 0:14
+5, 2:57
+
+
+[video, anger, non-anger]
+1a, 111,
+1a, 298, 
+1a, 299,
+1a, 343,
+1a, 383,
+
+1b, 521,
+1b, 527,
+1b, 532,
+
+2, 146,
+2, 151,
+2, 187,
+2, 188,
+2, 189,
+2, 309,
+
+3, 205,
+3, 206,
+3, 246,
+
+Debate 1, Alpha, FP1-FP2, Defender
+Avg anger: -1.6401
+Avg peace: 0.2643
+
+Debate 2, Alpha, FP1-FP2, Defender
+Avg anger: -6.9984
+Avg peace: -4.9702
+
+Debate 3, Alpha, FP1-FP2, Defender
+Avg anger: 10.8001
+Avg peace: 6.9422
+
+Debate 5, Alpha, FP1-FP2, Defender
+Avg anger:
+Avg peace: 
