@@ -10,6 +10,9 @@
 7. Add 2C / 2D to graphs.
 8. Compare experienced vs non-experienced.
 
+## Extension app
+The app would give you an option to choose what type of debate to run investigations on. Based on the times that we have chosen, the app would run an oscillatory power test on the debate at a frequency given by the user. It is an interface that implements the methodology that we have used. If implementing multiple classifiers, an option to train and test different classifiers could be implemented using different portions of the data.
+
 ## INSTRUCTIONS
 
 Intersected times of anger / non-anger are in debate_X_times.m / debate_X_times_peace.m. The electrodes and frequency specifications are in elec_freq.m.
