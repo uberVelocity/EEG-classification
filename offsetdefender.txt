@@ -29,6 +29,16 @@
 3, 206,
 3, 246,
 
+5, 261, 93
+5, 265, 102
+5, 266, 117
+5, 294, 130
+5, 296, 136
+5, 305, 152
+5, 424, 159
+5, 425, 194
+5, 429, 216
+
 Debate 1, Alpha, FP1-FP2, Defender
 Avg anger: -1.6401
 Avg peace: 0.2643
@@ -46,10 +56,10 @@ Avg anger: 10.8001
 Avg peace: 6.9422
 
 Debate 5, Alpha, FP1-FP2, Defender
-Avg anger:
-Avg peace: 
-
-
+Avg anger: 38.6695
+Avg peace: 14.9354
+-------------------------------------
+-------------------------------------
 Debate 1, Theta, FP1-FP2, Defender
 Avg anger: 4.2293
 Avg peace: -4.6654
@@ -67,10 +77,10 @@ Avg anger: 87.7625
 Avg peace: 64.0795
 
 Debate 5, Theta, FP1-FP2, Defender
-Avg anger: 
-Avg peace: 
-
-
+Avg anger: 249.0904
+Avg peace: 84.3136
+-------------------------------------
+-------------------------------------
 Debate 1, Beta, FP1-FP2, Defender
 Avg anger: -0.1566
 Avg peace: 0.1149
@@ -88,73 +98,73 @@ Avg anger: 7.9960
 Avg peace: 6.2088
 
 Debate 5, Beta, FP1-FP2, Defender
-Avg anger: 
-Avg peace: 
+Avg anger: 28.5714
+Avg peace: 11.9010
+-------------------------------------
+-------------------------------------
+Debate 1, Alpha, F3-F4, Defender
+Avg anger: -0.5739
+Avg peace: -0.2564
 
+Debate 1b, Alpha, F3-F4, Defender
+Avg anger: 0.8176
+Avg peace: -0.2947
 
-Debate 1, Alpha, F4-F3, Defender
-Avg anger: 0.5739
-Avg peace: 0.2564
+Debate 2, Alpha, F3-F4, Defender
+Avg anger: -1.4772
+Avg peace: 0.0272
 
-Debate 1b, Alpha, F4-F3, Defender
-Avg anger: -0.8176
-Avg peace: 0.2947
+Debate 3, Alpha, F3-F4, Defender
+Avg anger: 15.8829
+Avg peace: 2.8727
 
-Debate 2, Alpha, F4-F3, Defender
-Avg anger: 1.4772
-Avg peace: -0.0272
-
-Debate 3, Alpha, F4-F3, Defender
-Avg anger: -15.8829
-Avg peace: -2.8727
-
-Debate 5, Alpha, F4-F3, Defender
-Avg anger:
-Avg peace:
-
-
-Debate 1, Theta, F4-F3, Defender
+Debate 5, Alpha, F3-F4, Defender
+Avg anger: 7.1132
+Avg peace: 1.4254
+-------------------------------------
+-------------------------------------
+Debate 1, Theta, F3-F4, Defender
 Avg anger: 0.7581
 Avg peace: 0.3440
 
-Debate 1b, Theta, F4-F3, Defender
-Avg anger: -1.1373
-Avg peace:  2.3789
+Debate 1b, Theta, F3-F4, Defender
+Avg anger: 1.1373
+Avg peace: -2.3789
 
-Debate 2, Theta, F4-F3, Defender
-Avg anger: 13.6845
-Avg peace: 0.2132
+Debate 2, Theta, F3-F4, Defender
+Avg anger: -13.6845
+Avg peace: -0.2132
 
-Debate 3, Theta, F4-F3, Defender
-Avg anger: -29.9603
-Avg peace: -13.6259
+Debate 3, Theta, F3-F4, Defender
+Avg anger: 29.9603
+Avg peace: 13.6259
 
-Debate 5, Theta, F4-F3, Defender
-Avg anger:
-Avg peace:
+Debate 5, Theta, F3-F4, Defender
+Avg anger: 12.1841
+Avg peace: 4.3847
+-------------------------------------
+-------------------------------------
+Debate 1, Beta, F3-F4, Defender
+Avg anger: 0.1474
+Avg peace: 0.0133
 
+Debate 1b, Beta, F3-F4, Defender
+Avg anger: 0.3983
+Avg peace: -0.1716
 
-Debate 1, Beta, F4-F3, Defender
-Avg anger: -0.1474
-Avg peace: -0.0133
+Debate 2, Beta, F3-F4, Defender
+Avg anger: -1.1870
+Avg peace: -0.1679
 
-Debate 1b, Beta, F4-F3, Defender
-Avg anger: -0.3983
-Avg peace: 0.1716
+Debate 3, Beta, F3-F4, Defender
+Avg anger: 8.0819
+Avg peace: 1.4639
 
-Debate 2, Beta, F4-F3, Defender
-Avg anger: 1.1870
-Avg peace: 0.1679
-
-Debate 3, Beta, F4-F3, Defender
-Avg anger: -8.0819
-Avg peace: -1.4639
-
-Debate 5, Alpha, F4-F3, Defender
-Avg anger: 
-Avg peace: 
-
-
+Debate 5, Beta, F3-F4, Defender
+Avg anger: 1.9026
+Avg peace: -0.0742
+-------------------------------------
+-------------------------------------
 Debate 1, Alpha, T8-T7, Defender
 Avg anger: 2.9192
 Avg peace: 1.0296
@@ -172,10 +182,10 @@ Avg anger: 8.8180
 Avg peace: 1.3898
 
 Debate 5, Alpha, T8-T7, Defender
-Avg anger: 
-Avg peace: 
-
-
+Avg anger: 196.0662
+Avg peace: 3.5908
+-------------------------------------
+-------------------------------------
 Debate 1, Theta, T8-T7, Defender
 Avg anger: 8.3359
 Avg peace: 0.5320
@@ -193,10 +203,10 @@ Avg anger: 17.0974
 Avg peace: 4.3360
 
 Debate 5, Theta, T8-T7, Defender
-Avg anger: 
-Avg peace: 
-
-
+Avg anger: 151.5822
+Avg peace: 2.2343
+-------------------------------------
+-------------------------------------
 Debate 1, Beta, T8-T7, Defender
 Avg anger: 4.9338
 Avg peace: 1.4734
@@ -214,5 +224,5 @@ Avg anger: 4.7186
 Avg peace: 1.7361
 
 Debate 5, Beta, T8-T7, Defender
-Avg anger: 
-Avg peace: 
+Avg anger: 69.6583
+Avg peace: 12.7438

@@ -51,13 +51,13 @@ Actual value to plug in angerTimes
 5, 369, 95
 5, 390, 345
 5, 417, 164
-
+-------------------------------------
 Debate 1, Alpha, FP1-FP2, Challenger
 Avg anger: 12.8973
 Avg non-anger: 10.7466
 
 Debate 2, Alpha, FP1-FP2, Challenger
-Avg anger: 31.8603 % AWWWWWWWWW YEAAAAAAAAAAAH
+Avg anger: 31.8603 
 Avg non-anger: -6.3562
 
 Debate 3, Alpha, FP1-FP2, Challenger
@@ -67,8 +67,8 @@ Avg peace: -7.7622
 Debate 5, Alpha, FP1-FP2, Challenger
 Avg anger: 0.8184
 Avg peace: 0.2177
-
-
+-------------------------------------
+-------------------------------------
 Debate 1, Theta, FP1-FP2, Challenger
 Avg anger: -34.6979
 Avg peace: -18.2063
@@ -84,8 +84,8 @@ Avg peace: -4.9417
 Debate 5, Theta, FP1-FP2, Challenger
 Avg anger: 11.8083
 Avg peace: 31.0217
-
-
+-------------------------------------
+-------------------------------------
 Debate 1, Beta, FP1-FP2, Challenger
 Avg anger: 13.3079
 Avg peace: 7.1506
@@ -101,8 +101,8 @@ Avg peace: -3.2184
 Debate 5, Beta, FP1-FP2, Challenger
 Avg anger: 5.3612
 Avg peace: 2.6482
-
-
+-------------------------------------
+-------------------------------------
 Debate 1, Alpha, F3-F4, Challenger
 Avg anger: 3.8180
 Avg peace: 2.7052
@@ -118,8 +118,8 @@ Avg peace: -5.5079
 Debate 5, Alpha, F3-F4, Challenger
 Avg anger: -0.1463
 Avg peace: -1.7260
-
-
+-------------------------------------
+-------------------------------------
 Debate 1, Theta, F3-F4, Challenger
 Avg anger: 9.8737
 Avg peace: 20.5308
@@ -135,8 +135,8 @@ Avg peace: -4.0576
 Debate 5, Theta, F3-F4, Challenger
 Avg anger: -14.7250
 Avg peace: -5.1884
-
-
+-------------------------------------
+-------------------------------------
 Debate 1, Beta, F3-F4, Challenger
 Avg anger: 2.6638
 Avg peace: 0.8313
@@ -152,8 +152,8 @@ Avg peace: -4.6690
 Debate 5, Beta, F3-F4, Challenger
 Avg anger: -0.3392
 Avg peace: -0.8085
-
-
+-------------------------------------
+-------------------------------------
 Debate 1, Alpha, T8-T7, Challenger
 Avg anger: 2.1412
 Avg peace: 3.4905
@@ -169,8 +169,8 @@ Avg peace: 3.8298
 Debate 5, Alpha, T8-T7, Challenger
 Avg anger: -3.5402
 Avg peace: -4.5845
-
-
+-------------------------------------
+-------------------------------------
 Debate 1, Theta, T8-T7, Challenger
 Avg anger: 0.1805
 Avg peace: 0.7148
@@ -186,8 +186,8 @@ Avg peace: 4.5064
 Debate 5, Theta, T8-T7, Challenger
 Avg anger: -5.0290
 Avg peace: -6.5694
-
-
+-------------------------------------
+-------------------------------------
 Debate 1, Beta, T8-T7, Challenger
 Avg anger: 4.6706
 Avg peace: 6.1363
