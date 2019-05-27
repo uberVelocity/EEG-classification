@@ -1,24 +1,67 @@
 # Bachelor project 
 
 ## TODO:
-1. Recompute F4 - F3 for the challenger since they are currently flipped.
-2. Compose graphs grouped via frequency.
-3. Compose graphs by averaging frequencies.
-4. Finish 5th video analysis.
-5. Finish two challenger / two defender.
-6. Analyze 2C / 2D.
-7. Add 2C / 2D to graphs.
-8. Compare experienced vs non-experienced.
-9. Array with debate structure in them. Each structure has attributed an offset and
-the times of anger. In order to consider all the debates as one, the classifier loops
-through the array of structures and uses the local offset and times.
-(maybe offset is not even needed since times are calculated before classifier is run).
-10. **After** getting beginner results of analysis, then maybe take 1 second interval times of interest, so half a trial.
-Recommendation from teacher as occurrence of anger may dissipate quickly. This works under the assumption that the statement is true 
-and under the assumption that we have accurate times. 
-11. Apply a Linear Mixed effects model in R on the data (need to investigate what this entails).
+1. Watch 2D.
+2. Add 2C / 2D to graphs.
+3. Compare experienced vs non-experienced.
 
-# Extension app
+## Linear mixed effects model
+Two things always need to be done to validify a Linear mixed effects model:
+1. Check for normality and homogeneity.
+2. You need to construct a so-called “null model” and compare the performance of your mixed model to this null model.
+I. Mixed effects models belong to the family of parametric statistical techniques (together with such tests as t-tests and
+ANOVAs). Parametric approaches require the difference between the conditions
+to be normally distributed, i.e. the differences between condition A and condition
+B need to approximate a bell-shaped curve. Non-parametric techniques do not
+have this restriction – they are “distribution-free” –, however, mixed models are
+parametric and therefore we need to check whether the differences actually follow
+the normal curve. Another requirement of mixed models is that the data is
+homogenous, namely that one part of your dataset is not vastly different from
+another with respect to e.g. variance.
+
+This plot checks for both -> Two clouds are formed depicting differences between male and female.
+In our case, we are interested in (hopefully, if there is an effect between experienced and non-experienced) noticing two distinct clouds relating experienced and non-experienced monks.
+They are compared in terms of F3-F4, FP1-FP2, and T8-T7 electrode differences for anger moments. **A linear trend must not be present, or any pattern for that matter.** Relatively higher differences should be noticed for beginner monks than for experienced monks. Not only that but the frequency of these differences should be higher in beginner than in experienced monks.
+```R
+plot(fitted(politeness.model), residuals(politeness.model))
+```
+This will check the intensity of anger, meaning that higher differences will account for a stronger likelihood that
+the anger moment event indicates anger. Bare in mind that ultimately we are interested in seeing whether beginner monks
+have more occurrences of anger compared to experienced monks. 
+
+II. We need to check that our model performs significantly better than a 'NULL model'.
+A null model is a model that includes only the random effects and not the fixed effects we’re
+interested in. You can think of this as a kind of “sanity check” in which we assess
+whether our fixed effects have any merit at all. The null model below has a single
+fixed effect “1”.
+```R
+politeness.null = lmer(frequency ~ 1 + (1|subject) + (1|scenario), data=politeness)
+```
+Then, we perform a so-called likelihood ratio test with the anova()
+command. We simply put the test model as one argument and the null model as
+the other:
+```R
+anova(politeness.model, politeness.null)
+```
+If the likelihood ratio test would not reach significance, you should reject your
+results and not report them.
+
+### Method of execution of LME
+Due to the fact that the occurrences of anger per debate are scarce, the classifier would be unable to learn from them without risking over-fitting. Over-fitting would occur since the participants in the debates vary randomly in terms of skull-thickness and inter-brain synchronization. As such, instead of treating each debate separately, a continuous mesh of debates is created by concatenating the clean EEG readings of each electrode one after another. The resulting continuous debate should be stored in .csv format for easy R implementation.
+OPTION 1: Since inter-brain synchronization may differ between participants, the final reading of the electrode may be different from one debatee to another. To account for this, inter-brain synchronization is treated as a random effect.
+OPTION 2: Since there may be individual differences between participants that are out of our control we treat the debate number (equivalent to scenario number from the tutorial) as a random effect.
+OPTION 3: Both OPTION 1 and OPTION 2.
+
+Normality, homogeneity, and a null model comparison needs to be created and compared to our model. If there is a significant difference between the two it means that our fixed effects are influencing our model. (our fixed effects being experienced and beginner).
+
+
+### Combating times
+Since we know how many trials each debate has and we know the trial that we want to get from a certain debatee, we need to add to the time that we find the amount of trials that have come before the debate in question. So, if we're intersted in time 10 of debate 2 and debate 1 has 620 trials, then we should investigate trial 630 of the concatenated string of debates.
+
+## Potential Extension
+**After** getting non-experienced results of EEG analysis, then maybe take 1 second interval times of interest, so half a trial. Recommendation from teacher as occurrence of anger may dissipate quickly. This works under the assumption that the statement is true and under the assumption that we have accurate times. 
+
+## Extension app
 The app would give you an option to choose what type of debate to run investigations on. Based on the times that we have chosen, the app would run an oscillatory power test on the debate at a frequency given by the user. It is an interface that implements the methodology that we have used. If implementing multiple classifiers, an option to train and test different classifiers could be implemented using different portions of the data.
 ## INSTRUCTIONS
 
