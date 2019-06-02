@@ -1,10 +1,9 @@
 # Bachelor project 
 
 ## TODO:
-1. Watch 2D.
+1. Before computing channel mean make sure no outliers are present for a given time!!!
 2. Add 2C / 2D to graphs.
 3. Compare experienced vs non-experienced.
-
 ## Linear mixed effects model
 Two things always need to be done to validify a Linear mixed effects model:
 1. Check for normality and homogeneity.
