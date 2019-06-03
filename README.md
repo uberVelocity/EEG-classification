@@ -1,6 +1,7 @@
 # Bachelor project 
 
 ## TODO:
+0. Save values of oscillatory power at sites, not the average, plot them and compare them.
 1. Before computing channel mean make sure no outliers are present for a given time!!!
 2. Add 2C / 2D to graphs.
 3. Compare experienced vs non-experienced.
