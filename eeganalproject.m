@@ -23,25 +23,53 @@ load('debate_3_times_peace');
 load('debate_3_times_peace_defender');
 load('debate_5_times');
 load('debate_5_times_peace');
+load('debate_5_times_defender');
+load('debate_5_times_peace_defender');
+load('debate_2c1_times');
+load('debate_2c1_times_peace');
+load('debate_2c2_times');   
+load('debate_2c2_times_peace');
+
+% Load inexperienced times
+load('debate_8666_times');
+load('debate_8356_times');
+load('debate_8360_times');
+load('debate_8362_times');
+load('debate_8666_times_defender');
+load('debate_8362_times_defender');
+
+
 % Compute power oscillation of EEG data.
-[TFRiccleanedA, cfg] = fieldanalfn(beta, data_iccleanedA);
+[TFRiccleanedB, cfg] = fieldanalfn(alpha, data_iccleanedB);
 
 % Compute freq descriptives of result.
-[freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedA);
+[freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedB);
 
 % Store the powscptrm for easy access.
 pows = freqdesc.powspctrm;
 
 % Compute average difference between conditions.
-avg_diff_anger = comp(debate_1b_times_defender, FP1, FP2, pows);
-avg_diff_peace = comp(debate_1b_times_peace_defender, FP1, FP2, pows);
+% avg_diff_anger = comp(debate_1_times, FP1, FP1, pows);
+% avg_diff_peace = comp(debate_1_times_peace, FP1, FP1, pows);
+
+avg_vec_power_anger = compsingle(debate_8660_times, FP1, pows);
+avg_vec_power_peace = compsingle(debate_8660_times_peace, FP1, pows);
+
+for index = 1:length(debate_5_times_defender)
+    squeezedValuesCh2 = squeeze(pows(debate_5_times_defender(index), FP1,:,:));
+    squeezedValuesDe2 = squeeze(pows(debate_5_times_peace_defender(index), FP1,:,:));
+    squeezedValuesCh = squeezedValuesCh2(:);
+    squeezedValuesDe = squeezedValuesDe2(:);
+    resultmachineinput(squeezedValuesCh, squeezedValuesDe);
+end
 
 % Mean anger vs mean non-anger
-mean_anger = mean(avg_diff_anger);
-mean_peace = mean(avg_diff_peace);
+mean_anger = mean(avg_vec_power_anger);
+mean_peace = mean(avg_vec_power_peace);
 
 mean_anger 
 mean_peace
+mean_anger - mean_peace
 
 % Flips anger and non-anger vectors to plot boxplots.
 flippedSqAng = averageSqueezedAnger';
@@ -57,7 +85,7 @@ group = [ones(size(flippedSqAng)); 2 * ones(size(flippedSqPeac))];
 % Plot boxplot for comparison.
 figure
 boxplot([flippedSqAng; flippedSqPeac],group);
-title('F4: Anger vs Non-Anger');
+title('FP1: Anger vs Non-Anger');
 ylabel('Power');
 set(gca,'XTickLabel',{'anger','non-anger'});
 
@@ -94,7 +122,7 @@ cfg.baselinetype = 'absolute';
 cfg.zlim = [-3e-27 3e-27];
 cfg.showlabels = 'yes';
 cfg.showoutline = 'yes';
-cfg.layout = 'easycapM25.mat';
+cfg.layout = 'elec1010B.lay';
 figure;
 ft_multiplotTFR(cfg, TFRiccleanedB);
 

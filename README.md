@@ -54,7 +54,6 @@ OPTION 3: Both OPTION 1 and OPTION 2.
 
 Normality, homogeneity, and a null model comparison needs to be created and compared to our model. If there is a significant difference between the two it means that our fixed effects are influencing our model. (our fixed effects being experienced and beginner).
 
-
 ### Combating times
 Since we know how many trials each debate has and we know the trial that we want to get from a certain debatee, we need to add to the time that we find the amount of trials that have come before the debate in question. So, if we're intersted in time 10 of debate 2 and debate 1 has 620 trials, then we should investigate trial 630 of the concatenated string of debates.
 
