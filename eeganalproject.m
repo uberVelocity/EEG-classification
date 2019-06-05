@@ -37,10 +37,20 @@ load('debate_8360_times');
 load('debate_8362_times');
 load('debate_8666_times_defender');
 load('debate_8362_times_defender');
-
-
+load('debate_8666_times_peace');
+load('debate_8666_times_peace_defender');
+load('debate_8360_times_peace');
+load('debate_8356_times_peace');
+%load('debate_8362_times_peace');
+%load('debate_8362_times_peace_defender');
+load('debate_d108c109_times.mat');
+load('debate_d108c109_times_defender.mat');
+load('debate_d109c108_times.mat');
+load('debate_d93c94_times_defender.mat');
+load('debate_d93c94l_times.mat');
 % Compute power oscillation of EEG data.
-[TFRiccleanedB, cfg] = fieldanalfn(alpha, data_iccleanedB);
+frequency = 'theta';
+[TFRiccleanedB, cfg] = fieldanalfn(theta, data_iccleanedB);
 
 % Compute freq descriptives of result.
 [freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedB);
@@ -52,15 +62,19 @@ pows = freqdesc.powspctrm;
 % avg_diff_anger = comp(debate_1_times, FP1, FP1, pows);
 % avg_diff_peace = comp(debate_1_times_peace, FP1, FP1, pows);
 
-avg_vec_power_anger = compsingle(debate_8660_times, FP1, pows);
-avg_vec_power_peace = compsingle(debate_8660_times_peace, FP1, pows);
+avg_vec_power_anger = compsingle(debate_8666_times, FP1, pows);
+avg_vec_power_peace = compsingle(debate_8666_times_peace, FP1, pows);
+debate_name = 'debate_8666_times';
 
-for index = 1:length(debate_5_times_defender)
-    squeezedValuesCh2 = squeeze(pows(debate_5_times_defender(index), FP1,:,:));
-    squeezedValuesDe2 = squeeze(pows(debate_5_times_peace_defender(index), FP1,:,:));
+% avg_vec_anger = compsingle(debate_8666_times, FP1, pows);
+% avg_vec_peace = compsingle(debate_8666_times_peace, FP1, pows);
+
+for index = 1:length(debate_8666_times)
+    squeezedValuesCh2 = squeeze(pows(debate_8666_times(index), FP1,:,:));
+    squeezedValuesDe2 = squeeze(pows(debate_8666_times_peace(index), FP1,:,:));
     squeezedValuesCh = squeezedValuesCh2(:);
     squeezedValuesDe = squeezedValuesDe2(:);
-    resultmachineinput(squeezedValuesCh, squeezedValuesDe);
+    resultmachineinput(squeezedValuesCh, squeezedValuesDe, num2str(index), debate_name, frequency);
 end
 
 % Mean anger vs mean non-anger
