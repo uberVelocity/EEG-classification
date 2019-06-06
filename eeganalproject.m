@@ -62,19 +62,24 @@ pows = freqdesc.powspctrm;
 % avg_diff_anger = comp(debate_1_times, FP1, FP1, pows);
 % avg_diff_peace = comp(debate_1_times_peace, FP1, FP1, pows);
 
-avg_vec_power_anger = compsingle(debate_8666_times, FP1, pows);
-avg_vec_power_peace = compsingle(debate_8666_times_peace, FP1, pows);
-debate_name = 'debate_8666_times';
+avg_vec_power_anger = compsingle(debate_8666_times, FP2, pows);
+avg_vec_power_peace = compsingle(debate_8666_times_peace, FP2, pows);
+debate_name = 'debate_8666_times_defender';
+electro = 'FP2';
 
 % avg_vec_anger = compsingle(debate_8666_times, FP1, pows);
 % avg_vec_peace = compsingle(debate_8666_times_peace, FP1, pows);
 
-for index = 1:length(debate_8666_times)
-    squeezedValuesCh2 = squeeze(pows(debate_8666_times(index), FP1,:,:));
-    squeezedValuesDe2 = squeeze(pows(debate_8666_times_peace(index), FP1,:,:));
+for index = 1:length(debate_8666_times_defender)
+    squeezedValuesCh2 = squeeze(pows(debate_8666_times_defender(index), FP2,:,:));
+    %squeezedValuesCh21 = squeeze(pows(debate_8666_times(index), F4, :, :));
+    squeezedValuesDe2 = squeeze(pows(debate_8666_times_peace_defender(index), FP2,:,:));
+    %squeezedValuesDe21 = squeeze(pows(debate_8666_times_peace(index), F4,:,:));
+    %diffCh = squeezedValuesCh2 - squeezedValuesCh21;
+    %diffDe = squeezedValuesDe2 - squeezedValuesDe21;
     squeezedValuesCh = squeezedValuesCh2(:);
     squeezedValuesDe = squeezedValuesDe2(:);
-    resultmachineinput(squeezedValuesCh, squeezedValuesDe, num2str(index), debate_name, frequency);
+    resultmachineinput(squeezedValuesCh, squeezedValuesDe, num2str(index), debate_name, frequency, electro);
 end
 
 % Mean anger vs mean non-anger
