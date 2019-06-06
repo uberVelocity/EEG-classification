@@ -19,6 +19,6 @@ placename = strcat(debate_name, graph_id);
 placename = strcat(placename, electro);
 placename = strcat(placename, frequency);
 disp(placename);
-fname = 'C:\Users\redth\Documents\University\Bachelor\git\bachelor-project\graphs\INNEXPERIENCED';
+fname = 'C:\Users\redth\Documents\University\Bachelor\git\bachelor-project\graphs\EXPERIENCED';
 saveas(gca, fullfile(fname, placename), 'jpeg');
 end

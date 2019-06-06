@@ -51,11 +51,11 @@ load('debate_d93c94l_times.mat');
 load('debate_d93c94l_times_peace');
 load('debate_d93c94l_times_peace_defender');
 % Compute power oscillation of EEG data.
-frequency = 'alpha';
-[TFRiccleanedB, cfg] = fieldanalfn(alpha, data_iccleanedB);
+frequency = 'theta';
+[TFRiccleanedA, cfg] = fieldanalfn(theta, data_iccleanedA);
 
 % Compute freq descriptives of result.
-[freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedB);
+[freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedA);
 
 % Store the powscptrm for easy access.
 pows = freqdesc.powspctrm;
@@ -66,19 +66,19 @@ pows = freqdesc.powspctrm;
 
 %avg_vec_power_anger = compsingle(debate_8362_times, FP2, pows);
 %avg_vec_power_peace = compsingle(debate_8362_times_peace, FP2, pows);
-debate_name = 'debate_d93c94l_times';
-electro = 'FP1';
+debate_name = 'debate_2_times_defender';
+electro = 'FP2';
 
 % avg_vec_anger = compsingle(debate_8666_times, FP1, pows);
 % avg_vec_peace = compsingle(debate_8666_times_peace, FP1, pows);
 
-for index = 1:length(debate_d93c94l_times)
-    squeezedValuesCh2 = squeeze(pows(debate_d93c94l_times(index), FP1,:,:));
-    %squeezedValuesCh21 = squeeze(pows(debate_d93c94l_times(index), T7, :, :));
-    squeezedValuesDe2 = squeeze(pows(debate_d93c94l_times(index), FP1,:,:));
-    %squeezedValuesDe21 = squeeze(pows(debate_d93c94l_times(index), T7,:,:));
-    %diffCh = squeezedValuesCh2 - squeezedValuesCh21;
-    %diffDe = squeezedValuesDe2 - squeezedValuesDe21;
+for index = 1:length(debate_2_times_defender)
+    squeezedValuesCh2 = squeeze(pows(debate_2_times_defender(index), FP2,:,:));
+    % squeezedValuesCh21 = squeeze(pows(debate_2_times_defender(index), F4, :, :));
+    squeezedValuesDe2 = squeeze(pows(debate_2_times_peace_defender(index), FP2,:,:));
+    % squeezedValuesDe21 = squeeze(pows(debate_2_times_peace_defender(index), F4,:,:));
+    % diffCh = squeezedValuesCh2 - squeezedValuesCh21;
+    % diffDe = squeezedValuesDe2 - squeezedValuesDe21;
     squeezedValuesCh = squeezedValuesCh2(:);
     squeezedValuesDe = squeezedValuesDe2(:);
     resultmachineinput(squeezedValuesCh, squeezedValuesDe, num2str(index), debate_name, frequency, electro);
