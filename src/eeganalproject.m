@@ -41,16 +41,18 @@ load('debate_8666_times_peace');
 load('debate_8666_times_peace_defender');
 load('debate_8360_times_peace');
 load('debate_8356_times_peace');
-%load('debate_8362_times_peace');
-%load('debate_8362_times_peace_defender');
+load('debate_8362_times_peace');
+load('debate_8362_times_peace_defender');
 load('debate_d108c109_times.mat');
 load('debate_d108c109_times_defender.mat');
 load('debate_d109c108_times.mat');
 load('debate_d93c94_times_defender.mat');
 load('debate_d93c94l_times.mat');
+load('debate_d93c94l_times_peace');
+load('debate_d93c94l_times_peace_defender');
 % Compute power oscillation of EEG data.
-frequency = 'theta';
-[TFRiccleanedB, cfg] = fieldanalfn(theta, data_iccleanedB);
+frequency = 'alpha';
+[TFRiccleanedB, cfg] = fieldanalfn(alpha, data_iccleanedB);
 
 % Compute freq descriptives of result.
 [freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedB);
@@ -62,19 +64,19 @@ pows = freqdesc.powspctrm;
 % avg_diff_anger = comp(debate_1_times, FP1, FP1, pows);
 % avg_diff_peace = comp(debate_1_times_peace, FP1, FP1, pows);
 
-avg_vec_power_anger = compsingle(debate_8666_times, FP2, pows);
-avg_vec_power_peace = compsingle(debate_8666_times_peace, FP2, pows);
-debate_name = 'debate_8666_times_defender';
-electro = 'FP2';
+%avg_vec_power_anger = compsingle(debate_8362_times, FP2, pows);
+%avg_vec_power_peace = compsingle(debate_8362_times_peace, FP2, pows);
+debate_name = 'debate_d93c94l_times';
+electro = 'FP1';
 
 % avg_vec_anger = compsingle(debate_8666_times, FP1, pows);
 % avg_vec_peace = compsingle(debate_8666_times_peace, FP1, pows);
 
-for index = 1:length(debate_8666_times_defender)
-    squeezedValuesCh2 = squeeze(pows(debate_8666_times_defender(index), FP2,:,:));
-    %squeezedValuesCh21 = squeeze(pows(debate_8666_times(index), F4, :, :));
-    squeezedValuesDe2 = squeeze(pows(debate_8666_times_peace_defender(index), FP2,:,:));
-    %squeezedValuesDe21 = squeeze(pows(debate_8666_times_peace(index), F4,:,:));
+for index = 1:length(debate_d93c94l_times)
+    squeezedValuesCh2 = squeeze(pows(debate_d93c94l_times(index), FP1,:,:));
+    %squeezedValuesCh21 = squeeze(pows(debate_d93c94l_times(index), T7, :, :));
+    squeezedValuesDe2 = squeeze(pows(debate_d93c94l_times(index), FP1,:,:));
+    %squeezedValuesDe21 = squeeze(pows(debate_d93c94l_times(index), T7,:,:));
     %diffCh = squeezedValuesCh2 - squeezedValuesCh21;
     %diffDe = squeezedValuesDe2 - squeezedValuesDe21;
     squeezedValuesCh = squeezedValuesCh2(:);
