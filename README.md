@@ -1,5 +1,8 @@
 # Bachelor project 
 
+## NOTES:
+Theta is usually a good descriptor of anger consistently throughout the trials.
+
 ## TODO:
 0. Save values of oscillatory power at sites, not the average, plot them and compare them.
 1. Before computing channel mean make sure no outliers are present for a given time!!!
