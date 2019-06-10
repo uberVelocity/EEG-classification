@@ -42,6 +42,9 @@ politeness.null = lmer(frequency ~ 1 + (1|subject) + (1|scenario), data=politene
 Then, we perform a so-called likelihood ratio test with an ANOVA.
 We simply put the test model as one argument and the null model as
 the other:
+
+
+
 ```R
 anova(politeness.model, politeness.null)
 ```

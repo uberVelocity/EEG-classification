@@ -1,12 +1,14 @@
-function [vec_avg_diff] = comp(times, higher_elec, lower_elec, pows)
-% Computes average difference of electrodes for every time.
-vec_avg_diff = zeros(1, length(times));
-for index = 1:length(times)
+function [elec_values] = comp(pows, noTrials, generated_samples, elec)
+% Transforms a 2D representation of elec values into 1D for all electrodes
+elec_values = zeros(1, generated_samples);
+disp(size(elec_values));
+elec_values(:) = nanmean(squeeze(pows(1,elec,:,:)));
+disp(elec_values);
+for index = 2:noTrials
     % Reduces 1-sized dimension to convert matrix from 4D to 2D.
-    squeezedHigher = squeeze(pows(times(index),higher_elec,:,:));
-    squeezedLower = squeeze(pows(times(index),lower_elec,:,:));
+    elec_values = horzcat(elec_values, nanmean(squeeze(pows(index,elec,:,:))));
     % Compute difference between higher and lower electrodes power.
-    difference = squeezedHigher - squeezedLower;
-    vec_avg_diff(index) = nanmean(nanmean(difference));
+    
 end
+disp(elec_values);
 end

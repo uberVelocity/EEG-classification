@@ -31,10 +31,10 @@ load('debate_2c2_times');
 load('debate_2c2_times_peace');
 
 % Load inexperienced times
-load('debate_8666_times');
-load('debate_8356_times');
-load('debate_8360_times');
-load('debate_8362_times');
+load('debate_8666_times'); % 1
+load('debate_8356_times'); % 2
+load('debate_8360_times'); % 3
+load('debate_8362_times'); % 4
 load('debate_8666_times_defender');
 load('debate_8362_times_defender');
 load('debate_8666_times_peace');
@@ -51,14 +51,32 @@ load('debate_d93c94l_times.mat');
 load('debate_d93c94l_times_peace');
 load('debate_d93c94l_times_peace_defender');
 % Compute power oscillation of EEG data.
-frequency = 'theta';
-[TFRiccleanedA, cfg] = fieldanalfn(theta, data_iccleanedA);
+frequency = 'alpha';
+name = 1;
+[TFRiccleanedB, cfg] = fieldanalfn(alpha, data_iccleanedB);
 
 % Compute freq descriptives of result.
-[freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedA);
+[freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedB);
+freqdesc
+noTrials = size(data_iccleanedB.trial, 2);
+generated_samples = size(freqdesc.powspctrm, 4);
+% Label anger moments
+% final_data.anger = zeros(1, noTrials);
+% final_data.isExp = zeros(1, noTrials);
+% final_data.isExp(:) = 1;
+% final_data.id = zeros(1, noTrials);
+% final_data.id(:) = name;
+% Still need to label anger final_data.anger
 
 % Store the powscptrm for easy access.
 pows = freqdesc.powspctrm;
+
+gen_values_array = zeros(32, generated_samples * noTrials);
+for index = 1:32
+    gen_values_array(index, :) = comp(pows, noTrials, generated_samples, index);
+end
+final_data.alphinal = gen_values_array;
+
 
 % Compute average difference between conditions.
 % avg_diff_anger = comp(debate_1_times, FP1, FP1, pows);
@@ -67,7 +85,7 @@ pows = freqdesc.powspctrm;
 %avg_vec_power_anger = compsingle(debate_8362_times, FP2, pows);
 %avg_vec_power_peace = compsingle(debate_8362_times_peace, FP2, pows);
 debate_name = 'debate_2_times_defender';
-electro = 'FP2';
+electro = 'FP1';
 
 % avg_vec_anger = compsingle(debate_8666_times, FP1, pows);
 % avg_vec_peace = compsingle(debate_8666_times_peace, FP1, pows);
@@ -81,7 +99,7 @@ for index = 1:length(debate_2_times_defender)
     % diffDe = squeezedValuesDe2 - squeezedValuesDe21;
     squeezedValuesCh = squeezedValuesCh2(:);
     squeezedValuesDe = squeezedValuesDe2(:);
-    resultmachineinput(squeezedValuesCh, squeezedValuesDe, num2str(index), debate_name, frequency, electro);
+    %resultmachineinput(squeezedValuesCh, squeezedValuesDe, num2str(index), debate_name, frequency, electro);
 end
 
 % Mean anger vs mean non-anger
