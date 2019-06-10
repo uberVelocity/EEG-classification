@@ -51,31 +51,35 @@ load('debate_d93c94l_times.mat');
 load('debate_d93c94l_times_peace');
 load('debate_d93c94l_times_peace_defender');
 % Compute power oscillation of EEG data.
-frequency = 'alpha';
+frequency = 'theta';
 name = 1;
-[TFRiccleanedB, cfg] = fieldanalfn(alpha, data_iccleanedB);
+[TFRiccleanedB, cfg] = fieldanalfn(theta, data_iccleanedB);
 
 % Compute freq descriptives of result.
 [freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedB);
 freqdesc
 noTrials = size(data_iccleanedB.trial, 2);
 generated_samples = size(freqdesc.powspctrm, 4);
-% Label anger moments
-% final_data.anger = zeros(1, noTrials);
-% final_data.isExp = zeros(1, noTrials);
-% final_data.isExp(:) = 1;
-% final_data.id = zeros(1, noTrials);
-% final_data.id(:) = name;
-% Still need to label anger final_data.anger
+% Initialize placeholder_data
+placeholder_data.anger = zeros(1, noTrials * generated_samples);
+placeholder_data.isExp = zeros(1, noTrials * generated_samples);
+placeholder_data.id = zeros(1, noTrials * generated_samples);
 
+% Insert values to placeholder_data
+placeholder_data.isExp(:) = 1;
+placeholder_data.id(:) = name;
+placeholder_data.anger(debate_1_times) = 1;
+placeholder_data.anger(labelAnger(debate_1_times)) = 1;
 % Store the powscptrm for easy access.
 pows = freqdesc.powspctrm;
 
+% Generate generated_samples of all channels and store in 32D vector.
 gen_values_array = zeros(32, generated_samples * noTrials);
 for index = 1:32
     gen_values_array(index, :) = comp(pows, noTrials, generated_samples, index);
 end
-final_data.alphinal = gen_values_array;
+
+final_data.alphinal = horzcat(final_data.alphinal, gen_values_array);
 
 
 % Compute average difference between conditions.

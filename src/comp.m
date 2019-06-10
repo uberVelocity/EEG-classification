@@ -10,5 +10,4 @@ for index = 2:noTrials
     % Compute difference between higher and lower electrodes power.
     
 end
-disp(elec_values);
 end
