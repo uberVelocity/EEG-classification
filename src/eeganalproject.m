@@ -67,10 +67,13 @@ placeholder_data.isExp = zeros(1, noTrials * generated_samples);
 placeholder_data.id = zeros(1, noTrials * generated_samples);
 
 % Insert values to placeholder_data
-placeholder_data.isExp(:) = 1;
-placeholder_data.id(:) = name;
-placeholder_data.anger(debate_2_times) = 1;
-placeholder_data.anger(labelAnger(debate_2_times)) = 1;
+if (strcmp(frequency, 'alpha') == 1)
+    placeholder_data.isExp(:) = 1;
+    placeholder_data.id(:) = name;
+    placeholder_data.anger(debate_2_times) = 1;
+    placeholder_data.anger(labelAnger(debate_2_times)) = 1;
+end
+
 
 % Store the powscptrm for easy access.
 pows = freqdesc.powspctrm;
@@ -81,9 +84,12 @@ for index = 1:32
     gen_values_array(index, :) = comp(pows, noTrials, generated_samples, index);
 end
 % final_data.alphinal = gen_values_array;
-final_data.isExp = horzcat(final_data.isExp, placeholder_data.isExp);
-final_data.id = horzcat(final_data.id, placeholder_data.isExp);
-final_data.anger = horzcat(final_data.anger, placeholder_data.anger);
+if (strcmp(frequency, 'alpha') == 1)
+    final_data.isExp = horzcat(final_data.isExp, placeholder_data.isExp);
+    final_data.id = horzcat(final_data.id, placeholder_data.isExp);
+    final_data.anger = horzcat(final_data.anger, placeholder_data.anger);
+end
+
 final_data.alphinal = horzcat(final_data.alphinal, gen_values_array);
 
 % Compute average difference between conditions.
