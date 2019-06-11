@@ -4,9 +4,8 @@
 Theta is usually a good descriptor of anger consistently throughout the trials.
 
 ## TODO:
-0. Save values of oscillatory power at sites, not the average, plot them and compare them.
-1. Before computing channel mean make sure no outliers are present for a given time.
-2. Compare experienced vs. non-experienced (currently under investigation).
+1. Create multiplot topology of alpha, theta, and beta oscillatory power 
+of 32-channels for: {beginners}, {experienced}.
 ## Linear mixed effects model
 Two things always need to be done to validify a Linear mixed effects model:
 1. Check for normality and homogeneity.
