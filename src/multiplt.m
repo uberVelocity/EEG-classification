@@ -9,4 +9,3 @@ cfg.showoutline = 'yes';
 cfg.layout = 'elec1010B.lay';
 ft_multiplotTFR(cfg, freqdesc);
 end
-

@@ -5,7 +5,11 @@ Theta is usually a good descriptor of anger consistently throughout the trials.
 
 ## TODO:
 1. Create multiplot topology of alpha, theta, and beta oscillatory power 
-of 32-channels for: {beginners}, {experienced}.
+of 32-channels for: {beginners}, {experienced}. This implies 
+transforming the final_data_beginner and final_data_experienced into 
+**ft_freqdesc structures**.
+- `cumtapcnt` does not need to be included
+
 ## Linear mixed effects model
 Two things always need to be done to validify a Linear mixed effects model:
 1. Check for normality and homogeneity.
