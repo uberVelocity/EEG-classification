@@ -9,6 +9,7 @@ of 32-channels for: {beginners}, {experienced}. This implies
 transforming the final_data_beginner and final_data_experienced into 
 **ft_freqdesc structures**.
 - `cumtapcnt` does not need to be included
+2. Compute t-test again excluding outliers.
 
 ## Linear mixed effects model
 Two things always need to be done to validify a Linear mixed effects model:
