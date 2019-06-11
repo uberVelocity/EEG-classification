@@ -50,16 +50,23 @@ load('debate_d93c94_times_defender.mat');
 load('debate_d93c94l_times.mat');
 load('debate_d93c94l_times_peace');
 load('debate_d93c94l_times_peace_defender');
-% Compute power oscillation of EEG data.
+% Set up init variables
 frequency = 'alpha';
-name = 2;
-[TFRiccleanedB, cfg] = fieldanalfn(alpha, data_iccleanedB);
+
+% Compute power oscillation of EEG data.
+[TFRiccleanedB_alpha, cfg] = fieldanalfn(alpha, data_iccleanedB); 
+[freqdesc_alpha] = ft_freqdescriptives(cfg, TFRiccleanedB_alpha);
+
+[TFRiccleanedB_beta, cfg] = fieldanalfn(beta, data_iccleanedB); 
+[freqdesc_beta] = ft_freqdescriptives(cfg, TFRiccleanedB_beta);
+
+[TFRiccleanedB_theta, cfg] = fieldanalfn(theta, data_iccleanedB); 
+[freqdesc_theta] = ft_freqdescriptives(cfg, TFRiccleanedB_theta);
 
 % Compute freq descriptives of result.
-[freqdesc] = ft_freqdescriptives(cfg, TFRiccleanedB);
-freqdesc
 noTrials = size(data_iccleanedB.trial, 2);
-generated_samples = size(freqdesc.powspctrm, 4);
+generated_samples = size(freqdesc_alpha.powspctrm, 4);
+
 % Initialize placeholder_data
 placeholder_data = [];
 placeholder_data.anger = zeros(1, noTrials * generated_samples);
@@ -67,30 +74,39 @@ placeholder_data.isExp = zeros(1, noTrials * generated_samples);
 placeholder_data.id = zeros(1, noTrials * generated_samples);
 
 % Insert values to placeholder_data
-if (strcmp(frequency, 'alpha') == 1)
-    placeholder_data.isExp(:) = 1;
-    placeholder_data.id(:) = name;
-    placeholder_data.anger(debate_2_times) = 1;
-    placeholder_data.anger(labelAnger(debate_2_times)) = 1;
-end
+name = 2; %%%%%%
+placeholder_data.isExp(:) = 1; %%%%%%
+placeholder_data.id(:) = name;
+placeholder_data.anger(labelAnger(debate_2_times)) = 1; %%%%%%%
 
 
 % Store the powscptrm for easy access.
-pows = freqdesc.powspctrm;
+pows_alpha = freqdesc_alpha.powspctrm;
+pows_beta = freqdesc_beta.powspctrm;
+pows_theta = freqdesc_theta.powspctrm;
 
 % Generate generated_samples of all channels and store in 32D vector.
-gen_values_array = zeros(32, generated_samples * noTrials);
+gen_values_array_alpha = zeros(32, generated_samples * noTrials);
+gen_values_array_beta = zeros(32, generated_samples * noTrials);
+gen_values_array_theta = zeros(32, generated_samples * noTrials);
 for index = 1:32
-    gen_values_array(index, :) = comp(pows, noTrials, generated_samples, index);
-end
-% final_data.alphinal = gen_values_array;
-if (strcmp(frequency, 'alpha') == 1)
-    final_data.isExp = horzcat(final_data.isExp, placeholder_data.isExp);
-    final_data.id = horzcat(final_data.id, placeholder_data.isExp);
-    final_data.anger = horzcat(final_data.anger, placeholder_data.anger);
+    gen_values_array_alpha(index, :) = comp(pows_alpha, noTrials, generated_samples, index);
+    gen_values_array_beta(index, :) = comp(pows_beta, noTrials, generated_samples, index);
+    gen_values_array_theta(index, :) = comp(pows_theta, noTrials, generated_samples, index);
 end
 
-final_data.alphinal = horzcat(final_data.alphinal, gen_values_array);
+% Concatenate to final_data id, isExp, and anger levels.
+final_data.isExp = horzcat(final_data.isExp, placeholder_data.isExp);
+final_data.id = horzcat(final_data.id, placeholder_data.id);
+final_data.anger = horzcat(final_data.anger, placeholder_data.anger);
+
+% Concatenate to final_data alpha, beta, and theta results.
+final_data.alpha_results = horzcat(final_data.alpha_results, gen_values_array_alpha);
+final_data.beta_results = horzcat(final_data.beta_results, gen_values_array_beta);
+final_data.theta_results = horzcat(final_data.theta_results, gen_values_array_theta);
+
+% Show final_data.
+final_data
 
 % Compute average difference between conditions.
 % avg_diff_anger = comp(debate_1_times, FP1, FP1, pows);

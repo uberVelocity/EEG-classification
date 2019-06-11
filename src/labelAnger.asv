@@ -1,9 +1,0 @@
-function [angerLocations] = labelAnger(originalAngerTimes)
-%LABELANGER Summary of this function goes here
-%   Detailed explanation goes here
-angerLocations = zeros(1, 82*length(originalAngerTimes));
-for index = 1:length(originalAngerTimes)
-    angerLocations
-end
-end
-
