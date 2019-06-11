@@ -74,10 +74,10 @@ placeholder_data.isExp = zeros(1, noTrials * generated_samples);
 placeholder_data.id = zeros(1, noTrials * generated_samples);
 
 % Insert values to placeholder_data
-name = 2; %%%%%%
-placeholder_data.isExp(:) = 1; %%%%%%
+name = 8362; %%%%%%
+placeholder_data.isExp(:) = 0; %%%%%%
 placeholder_data.id(:) = name;
-placeholder_data.anger(labelAnger(debate_2_times)) = 1; %%%%%%%
+placeholder_data.anger(labelAnger(debate_8362_times)) = 1; %%%%%%%
 
 
 % Store the powscptrm for easy access.

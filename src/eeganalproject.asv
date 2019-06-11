@@ -52,7 +52,6 @@ load('debate_d93c94l_times_peace');
 load('debate_d93c94l_times_peace_defender');
 % Set up init variables
 frequency = 'alpha';
-name = 1; %%%%%%
 
 % Compute power oscillation of EEG data.
 [TFRiccleanedB_alpha, cfg] = fieldanalfn(alpha, data_iccleanedB); 
@@ -75,9 +74,10 @@ placeholder_data.isExp = zeros(1, noTrials * generated_samples);
 placeholder_data.id = zeros(1, noTrials * generated_samples);
 
 % Insert values to placeholder_data
+name = 5; %%%%%%
 placeholder_data.isExp(:) = 1; %%%%%%
 placeholder_data.id(:) = name;
-placeholder_data.anger(labelAnger(debate_1_times)) = 1; %%%%%%%
+placeholder_data.anger(labelAnger(debate_5_times)) = 1; %%%%%%%
 
 
 % Store the powscptrm for easy access.
@@ -95,19 +95,18 @@ for index = 1:32
     gen_values_array_theta(index, :) = comp(pows_theta, noTrials, generated_samples, index);
 end
 
-if (init_new_debate == 1)
-    final_data.isExp = horzcat(final_data.isExp, placeholder_data.isExp);
-    final_data.id = horzcat(final_data.id, placeholder_data.id);
-    final_data.anger = horzcat(final_data.anger, placeholder_data.anger);
-end
+% Concatenate to final_data id, isExp, and anger levels.
+final_data.isExp = horzcat(final_data.isExp, placeholder_data.isExp);
+final_data.id = horzcat(final_data.id, placeholder_data.id);
+final_data.anger = horzcat(final_data.anger, placeholder_data.anger);
+
+% Concatenate to final_data alpha, beta, and theta results.
 final_data.alpha_results = horzcat(final_data.alpha_results, gen_values_array_alpha);
 final_data.beta_results = horzcat(final_data.beta_results, gen_values_array_beta);
+final_data.theta_results = horzcat(final_data.theta_results, gen_values_array_theta);
+
+% Show final_data.
 final_data
-
-
-
-
-
 
 % Compute average difference between conditions.
 % avg_diff_anger = comp(debate_1_times, FP1, FP1, pows);
