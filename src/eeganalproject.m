@@ -74,10 +74,10 @@ placeholder_data.isExp = zeros(1, noTrials * generated_samples);
 placeholder_data.id = zeros(1, noTrials * generated_samples);
 
 % Insert values to placeholder_data
-name = 8362; %%%%%%
+name = 3; %%%%%%
 placeholder_data.isExp(:) = 0; %%%%%%
 placeholder_data.id(:) = name;
-placeholder_data.anger(labelAnger(debate_8362_times)) = 1; %%%%%%%
+placeholder_data.anger(labelAnger(debate_3_times)) = 1; %%%%%%%
 
 
 % Store the powscptrm for easy access.
@@ -96,17 +96,17 @@ for index = 1:32
 end
 
 % Concatenate to final_data id, isExp, and anger levels.
-final_data.isExp = horzcat(final_data.isExp, placeholder_data.isExp);
-final_data.id = horzcat(final_data.id, placeholder_data.id);
-final_data.anger = horzcat(final_data.anger, placeholder_data.anger);
+%final_data.isExp = horzcat(final_data.isExp, placeholder_data.isExp);
+%final_data.id = horzcat(final_data.id, placeholder_data.id);
+%final_data.anger = horzcat(final_data.anger, placeholder_data.anger);
 
 % Concatenate to final_data alpha, beta, and theta results.
-final_data.alpha_results = horzcat(final_data.alpha_results, gen_values_array_alpha);
-final_data.beta_results = horzcat(final_data.beta_results, gen_values_array_beta);
-final_data.theta_results = horzcat(final_data.theta_results, gen_values_array_theta);
+%final_data.alpha_results = horzcat(final_data.alpha_results, gen_values_array_alpha);
+%final_data.beta_results = horzcat(final_data.beta_results, gen_values_array_beta);
+%final_data.theta_results = horzcat(final_data.theta_results, gen_values_array_theta);
 
 % Show final_data.
-final_data
+%final_data
 
 % Compute average difference between conditions.
 % avg_diff_anger = comp(debate_1_times, FP1, FP1, pows);

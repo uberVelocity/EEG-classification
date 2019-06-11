@@ -13,7 +13,7 @@ exp_theta = final_data_exp.theta_results(:, :);
 hypotheses = zeros(3, 32);
 pvalues = zeros(3, 32);
 for index = 1:32 % Loop through all channels.
-    [hypotheses(1, index), pvalues(1, index)] = ttest2(shrinked_beginners_alpha(isfinite(shrinked_beginners_alpha)), exp_alpha(isfinite(exp_alpha)));
-    [hypotheses(2, index), pvalues(2, index)] = ttest2(shrinked_beginners_beta(isfinite(shrinked_beginners_beta)), exp_beta(isfinite(exp_beta)));
-    [hypotheses(3, index), pvalues(3, index)] = ttest2(shrinked_beginners_theta(isfinite(shrinked_beginners_theta)), exp_theta(isfinite(exp_theta)));
+    [hypotheses(1, index), pvalues(1, index)] = ttest2(rmmissing(shrinked_beginners_alpha), rmmissing(exp_alpha));
+    [hypotheses(2, index), pvalues(2, index)] = ttest2(rmmissing(shrinked_beginners_beta), rmmissing(exp_beta));
+    [hypotheses(3, index), pvalues(3, index)] = ttest2(rmmissing(shrinked_beginners_theta), rmmissing(exp_theta));
 end
