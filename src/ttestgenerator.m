@@ -50,13 +50,16 @@ hypotheses = zeros(3, 32);
 pvalues = zeros(3, 32);
 
 for index = 1:32 % Loop through all channels.
-    [hypotheses(1, index), pvalues(1, index)] = ttest2(storage_beginner_alpha(index, :), storage_exp_alpha(index, :));
-    [hypotheses(2, index), pvalues(2, index)] = ttest2(storage_beginner_beta(index, :), storage_exp_beta(index, :));
-    [hypotheses(3, index), pvalues(3, index)] = ttest2(storage_beginner_theta(index, :), storage_exp_theta(index, :));
-    
 end
 
+%  T-test between anger and non-anger moments at every channel.
+%    [hypotheses(1, index), pvalues(1, index)] = ttest2(storage_peace_alpha(index, :), storage_anger_alpha(index, :));
+%    [hypotheses(2, index), pvalues(2, index)] = ttest2(storage_peace_beta(index, :), storage_anger_beta(index, :));
+%    [hypotheses(3, index), pvalues(3, index)] = ttest2(storage_peace_theta(index, :), storage_anger_theta(index, :));
+
+
 %  T-test between beginners and experienced monks at every channel.
-%    [hypotheses(1, index), pvalues(1, index)] = ttest2(shrinked_beginners_alpha(:, isfinite(shrinked_beginners_alpha)), exp_alpha(isfinite(exp_alpha)));
-%    [hypotheses(2, index), pvalues(2, index)] = ttest2(shrinked_beginners_beta(isfinite(shrinked_beginners_beta)), exp_beta(isfinite(exp_beta)));
-%    [hypotheses(3, index), pvalues(3, index)] = ttest2(shrinked_beginners_theta(isfinite(shrinked_beginners_theta)), exp_theta(isfinite(exp_theta)));
+%    [hypotheses(1, index), pvalues(1, index)] = ttest2(storage_beginner_alpha(index, :), storage_exp_alpha(index, :));
+%    [hypotheses(2, index), pvalues(2, index)] = ttest2(storage_beginner_beta(index, :), storage_exp_beta(index, :));
+%    [hypotheses(3, index), pvalues(3, index)] = ttest2(storage_beginner_theta(index, :), storage_exp_theta(index, :));
+    
