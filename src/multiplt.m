@@ -7,5 +7,5 @@ cfg.baselinetype = 'absolute';
 cfg.showlabels = 'yes';
 cfg.showoutline = 'yes';
 cfg.layout = 'elec1010B.lay';
-ft_multiplotTFR(cfg, freqdesc);
+ft_multiplotTFR(cfg, cpy);
 end

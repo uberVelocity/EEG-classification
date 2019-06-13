@@ -5,7 +5,7 @@ ft_defaults;
 T7 = 12;
 T8 = 16;
 % Load electrodes, frequency intervals, and debate times.
-addpath('C:\Users\redth\Documents\University\Bachelor\git\bachelor-project\data_files');
+addpath('C:\Users\redth\Documents\University\Bachelor\git\bachelor-project\data_files\debate_times\');
 load('elec_freq');
 load('debate_1_times');
 load('debate_1_times_defender');
@@ -54,13 +54,13 @@ load('debate_d93c94l_times_peace_defender');
 frequency = 'alpha';
 
 % Compute power oscillation of EEG data.
-[TFRiccleanedB_alpha, cfg] = fieldanalfn(alpha, data_iccleanedB); 
+[TFRiccleanedB_alpha, cfg] = fieldanalfn(alpha, data3); 
 [freqdesc_alpha] = ft_freqdescriptives(cfg, TFRiccleanedB_alpha);
 
-[TFRiccleanedB_beta, cfg] = fieldanalfn(beta, data_iccleanedB); 
+[TFRiccleanedB_beta, cfg] = fieldanalfn(beta, data3); 
 [freqdesc_beta] = ft_freqdescriptives(cfg, TFRiccleanedB_beta);
 
-[TFRiccleanedB_theta, cfg] = fieldanalfn(theta, data_iccleanedB); 
+[TFRiccleanedB_theta, cfg] = fieldanalfn(theta, data3);
 [freqdesc_theta] = ft_freqdescriptives(cfg, TFRiccleanedB_theta);
 
 % Compute freq descriptives of result.
