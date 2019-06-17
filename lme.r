@@ -88,20 +88,26 @@ for(index in 1:96) {
   }
 }
 
+final_data_clean <- cbind(df, clean_values);
+
 new <- cbind(df, alpha_frame);
 new2 <- cbind(new, beta_frame);
 final_data <- cbind(new2, theta_frame);
 
 saveRDS(final_data, file = "final_data.rds");
 
-boxplot(`theta 1` ~ anger, data = final_data, outline = TRUE);
+boxplot(`alpha 32` ~ isExp*anger, data = final_data_clean, outline = TRUE);
 
-final_data.model = lmer(`alpha 1` ~ anger*isExp + (1|id), data = final_data);
-summary(final_data.model)
-anova(final_data.model);
+final_data_clean.model.aplha = lmer(`alpha 1` ~ isExp + (1|id), data = final_data_clean);
+final_data_clean.model.beta = lmer(`beta 1` ~ isExp + (1|id), data = final_data_clean);
+final_data_clean.model.theta = lmer(`theta 1` ~ isExp + (1|id), data = final_data_clean);
+summary(final_data_clean.model.alpha)
+summary(final_data_clean.model.beta)
+summary(final_data_clean.model.theta)
+anova(final_data_clean.model);
 
-qqnorm(final_data$`alpha 1`, pch = 1, frame = FALSE)
-qqline(final_data$`alpha 1`, col = "steelblue", lwd = 2)
+qqnorm(final_data_clean$`alpha 1`, pch = 1, frame = FALSE)
+qqline(final_data_clean$`alpha 1`, col = "steelblue", lwd = 2)
 plot(fitted(final_data.model), residuals(final_data.model))
 
 final_data$
