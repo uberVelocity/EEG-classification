@@ -5,6 +5,7 @@ library(languageR);
 library(dplyr);
 require(MASS);
 library(lmerTest);
+library(matrixStats);
 setwd("C:/Users/redth/Documents/University/Bachelor/git/bachelor-project/data_files")
 
 findOutlier <- function(data, cutoff = 3) {
@@ -24,6 +25,10 @@ removeOutlier <- function(data, outliers) {
     return(res)
   }, data, outliers)
   return(as.data.frame(result))
+}
+
+sdCol <- function(data) {
+  return(sd(data, na.rm = TRUE));
 }
 
 # data$alphaResults[1,] returns all values on row 1.
@@ -63,6 +68,26 @@ colnames(alpha_frame) <- alphaname;
 colnames(beta_frame) <- betaname;
 colnames(theta_frame) <- thetaname;
 
+cpy <- cbind(alpha_frame, beta_frame);
+valuebinds <- cbind(cpy, theta_frame);
+means <- colMeans(valuebinds, na.rm = TRUE);
+sds <- apply(valuebinds, 2, sdCol);
+
+pb <- txtProgressBar(min = 0, max = 96, initial = 0, char = "=",
+               width = NA);
+
+clean_values = valuebinds
+replaced = 0;
+for(index in 1:96) {
+  for (jindex in 1:154611) {
+    if (!is.nan(valuebinds[[index]][jindex]) && (abs(means[index] - valuebinds[[index]][jindex])/sds[index]) >= 5) {
+      replaced = replaced + 1;
+      clean_values[[index]][jindex] = NaN;
+    }
+    setTxtProgressBar(pb, index)
+  }
+}
+
 new <- cbind(df, alpha_frame);
 new2 <- cbind(new, beta_frame);
 final_data <- cbind(new2, theta_frame);
@@ -78,4 +103,16 @@ anova(final_data.model);
 qqnorm(final_data$`alpha 1`, pch = 1, frame = FALSE)
 qqline(final_data$`alpha 1`, col = "steelblue", lwd = 2)
 plot(fitted(final_data.model), residuals(final_data.model))
+
+final_data$
+
+
+
+
+
+
+
+
+
+
 
