@@ -69,12 +69,13 @@ final_data <- cbind(new2, theta_frame);
 
 saveRDS(final_data, file = "final_data.rds");
 
-boxplot(`alpha 13` ~ isExp, data = final_data, outline = FALSE);
+boxplot(`theta 1` ~ anger, data = final_data, outline = TRUE);
 
-final_data.model = lmer(`alpha 13` ~ isExp + (1|id), data = final_data);
+final_data.model = lmer(`alpha 1` ~ anger*isExp + (1|id), data = final_data);
+summary(final_data.model)
 anova(final_data.model);
 
 qqnorm(final_data$`alpha 1`, pch = 1, frame = FALSE)
 qqline(final_data$`alpha 1`, col = "steelblue", lwd = 2)
-
+plot(fitted(final_data.model), residuals(final_data.model))
 
