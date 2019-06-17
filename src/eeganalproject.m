@@ -54,14 +54,14 @@ load('debate_d93c94l_times_peace_defender');
 frequency = 'alpha';
 
 % Compute power oscillation of EEG data.
-[TFRiccleanedB_alpha, cfg] = fieldanalfn(alpha, data3); 
-[freqdesc_alpha] = ft_freqdescriptives(cfg, TFRiccleanedB_alpha);
+[TFRiccleanedB_alpha, cfg] = fieldanalfn(alpha, experienced); 
+[freqdesc_alpha_exp] = ft_freqdescriptives(cfg, TFRiccleanedB_alpha);
 
-[TFRiccleanedB_beta, cfg] = fieldanalfn(beta, data3); 
-[freqdesc_beta] = ft_freqdescriptives(cfg, TFRiccleanedB_beta);
+[TFRiccleanedB_beta, cfg] = fieldanalfn(beta, experienced); 
+[freqdesc_beta_exp] = ft_freqdescriptives(cfg, TFRiccleanedB_beta);
 
-[TFRiccleanedB_theta, cfg] = fieldanalfn(theta, data3);
-[freqdesc_theta] = ft_freqdescriptives(cfg, TFRiccleanedB_theta);
+[TFRiccleanedB_theta, cfg] = fieldanalfn(theta, experienced);
+[freqdesc_theta_theta] = ft_freqdescriptives(cfg, TFRiccleanedB_theta);
 
 % Compute freq descriptives of result.
 noTrials = size(data_iccleanedB.trial, 2);
@@ -202,4 +202,4 @@ cfg.baselinetype = 'absolute';
 csg.maskstyle = 'saturation';
 cfg.channel = 'Fp1_B';
 figure;
-ft_singleplotTFR(cfg, TFRiccleanedB);
+ft_singleplotTFR(cfg, TFRiccleanedB_alpha);
