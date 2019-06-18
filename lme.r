@@ -96,11 +96,13 @@ final_data_clean$id <- as.factor(final_data_clean$id);
 final_data_clean$anger <- as.factor(final_data_clean$anger);
 final_data_clean$isExp <- as.factor(final_data_clean$isExp);
 
-boxplot(`alpha 32` ~ isExp*anger, data = final_data_clean, outline = TRUE);
+boxplot(`theta 1` ~ isExp*anger, data = final_data_clean, outline = FALSE);
 
 final_data_clean.model.alpha = lmer(`alpha 1` ~ isExp*anger + (1|id), data = final_data_clean);
 final_data_clean.model.beta = lmer(`beta 1` ~ isExp*anger + (1|id), data = final_data_clean);
 final_data_clean.model.theta = lmer(`theta 1` ~ isExp*anger + (1|id), data = final_data_clean);
+
+boxplot(`theta 4` ~ anger*isExp, data = final_data_clean, outline = FALSE);
 
 final_data_cleam.model.alpha.1 = summary(final_data_clean.model.alpha)
 summary(final_data_clean.model.alpha)
@@ -154,20 +156,21 @@ summary(final_data_clean_beginners.theta)
 anova(final_data_clean_beginners.theta);
 
 
-final_data_clean_experienced.alpha = lmer(`alpha 28` ~ anger + (1|id), data = final_data_clean_experienced);
-final_data_clean_experienced.beta = lmer(`beta 28` ~ anger + (1|id), data = final_data_clean_experienced);
-final_data_clean_experienced.theta = lmer(`theta 28` ~ anger + (1|id), data = final_data_clean_experienced);
+final_data_clean_experienced.alpha = lmer(`alpha 32` ~ anger + (1|id), data = final_data_clean_experienced);
+final_data_clean_experienced.beta = lmer(`beta 32` ~ anger + (1|id), data = final_data_clean_experienced);
+final_data_clean_experienced.theta = lmer(`theta 32` ~ anger + (1|id), data = final_data_clean_experienced);
 
-final_data_clean_experienced.alpha.28 = summary(final_data_clean_experienced.alpha)
+final_data_clean_experienced.alpha.32 = summary(final_data_clean_experienced.alpha)
 summary(final_data_clean_experienced.alpha)
 anova(final_data_clean_experienced.alpha);
-final_data_clean_experienced.beta.28 = summary(final_data_clean_experienced.beta)
+final_data_clean_experienced.beta.32 = summary(final_data_clean_experienced.beta)
 summary(final_data_clean_experienced.beta)
 anova(final_data_clean_experienced.beta);
-final_data_clean_experienced.theta.28 = summary(final_data_clean_experienced.theta)
+final_data_clean_experienced.theta.32 = summary(final_data_clean_experienced.theta)
 summary(final_data_clean_experienced.theta)
 anova(final_data_clean_experienced.theta);
 
+boxplot(`beta 16` ~ anger, data = final_data_clean_beginners, outline = TRUE);
 
 
 final_anger_beginners_sample = final_data_clean_beginners[sample(which(final_data_clean_beginners$anger == 1), 2150),];
