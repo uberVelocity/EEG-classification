@@ -1,3 +1,7 @@
+% The script computes the average oscillatory power of a channel and stores
+% it. A t-test between channels + boxplots are created using the
+% resultmachineinput.m function at the end of this file.
+
 %#ok<*NOPTS>
 % Import and activate fieldtrip library.
 addpath('C:\Users\redth\Documents\University\Bachelor\fieldtrip-20181231');
@@ -79,8 +83,6 @@ placeholder_data.isExp(:) = 0; %%%%%%
 placeholder_data.id(:) = name;
 placeholder_data.anger(labelAnger(debate_3_times)) = 1; %%%%%%%
 
-TFRdiff
-
 % Store the powscptrm for easy access.
 pows_alpha = freqdesc_alpha.powspctrm;
 pows_beta = freqdesc_beta.powspctrm;
@@ -106,9 +108,6 @@ end
 %final_data.beta_results = horzcat(final_data.beta_results, gen_values_array_beta);
 %final_data.theta_results = horzcat(final_data.theta_results, gen_values_array_theta);
 
-% Show final_data.
-%final_data
-
 % Compute average difference between conditions.
 % avg_diff_anger = comp(debate_1_times, FP1, FP1, pows);
 % avg_diff_peace = comp(debate_1_times_peace, FP1, FP1, pows);
@@ -121,6 +120,9 @@ electro = 'FP1';
 % avg_vec_anger = compsingle(debate_8666_times, FP1, pows);
 % avg_vec_peace = compsingle(debate_8666_times_peace, FP1, pows);
 
+% Extract oscillatory powers of two channels of interest and construct boxplot
+% comparison. Uncomment squeezedValuesCh21, SqueezedValuesDe21, diffCh, and
+% diffDe to compute the difference between two channels.
 for index = 1:length(debate_2_times_defender)
     squeezedValuesCh2 = squeeze(pows(debate_2_times_defender(index), FP2,:,:));
     % squeezedValuesCh21 = squeeze(pows(debate_2_times_defender(index), F4, :, :));
@@ -133,74 +135,3 @@ for index = 1:length(debate_2_times_defender)
     %resultmachineinput(squeezedValuesCh, squeezedValuesDe, num2str(index), debate_name, frequency, electro);
 end
 
-% Mean anger vs mean non-anger
-mean_anger = mean(avg_vec_power_anger);
-mean_peace = mean(avg_vec_power_peace);
-
-mean_anger 
-mean_peace
-mean_anger - mean_peace
-
-% Flips anger and non-anger vectors to plot boxplots.
-flippedSqAng = averageSqueezedAnger';
-flippedSqPeac = averageSqueezedPeace';
-
-% Compute mean of intersected times of the conditions excluding NaN values
-% for statistics.
-ang = nanmean(flippedSqAng);
-peac = nanmean(flippedSqPeac);
-% Group the variables for comparison using boxplots.
-group = [ones(size(flippedSqAng)); 2 * ones(size(flippedSqPeac))];
-
-% Plot boxplot for comparison.
-figure
-boxplot([flippedSqAng; flippedSqPeac],group);
-title('FP1: Anger vs Non-Anger');
-ylabel('Power');
-set(gca,'XTickLabel',{'anger','non-anger'});
-
-
-% Plot the channel, displaying the two conditions.
-figure(10);
-plot(squeezedAnger);
-figure(11);
-plot(squeezedPeace);
-
-% Perform t-test for the two conditions.
-% h = [1, 0] = [rejects h, ~rejects h].
-% p = p-value (significance :=  p <= 0.05).
-[h,p] = ttest2(averageSqueezedAnger, averageSqueezedPeace);
-sprintf("h = %d", h)
-if p <= 0.05
-    sprintf("p = %.3f * ", p)
-else
-    sprintf("p = %.3f", p)
-end
-
-% Normalize data - FILLS WITH NaN!
-cpydata = TFRiccleanedB;
-cfg = [];
-cfg.baseline = [-0.5 -0.1];
-cfg.baselinetype = 'absolute';
-cfg.parameter = 'powspctrm';
-[TFRiccleanedB] = ft_freqbaseline(cfg, TFRiccleanedB);
-
-% Look at all channels at the same time.
-cfg = [];
-cfg.baseline = [-0.5 -0.1];
-cfg.baselinetype = 'absolute';
-cfg.zlim = [-3e-27 3e-27];
-cfg.showlabels = 'yes';
-cfg.showoutline = 'yes';
-cfg.layout = 'elec1010B.lay';
-figure;
-ft_multiplotTFR(cfg, TFRiccleanedB);
-
-% Look at only one channel from the data.
-cfg = [];
-cfg. baseline = [-0.5 -0.1];
-cfg.baselinetype = 'absolute';
-csg.maskstyle = 'saturation';
-cfg.channel = 'Fp1_B';
-figure;
-ft_singleplotTFR(cfg, TFRiccleanedB_alpha);
