@@ -1,3 +1,4 @@
+% Generates boxplots of anger and non-anger moments.
 function [angerout, peaceout] = resultmachineinput(anger, peace, graph_id, debate_name, frequency, electro)
 group = [ones(size(anger)); 2 * ones(size(peace))];
 

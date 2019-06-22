@@ -79,6 +79,7 @@ placeholder_data.isExp(:) = 0; %%%%%%
 placeholder_data.id(:) = name;
 placeholder_data.anger(labelAnger(debate_3_times)) = 1; %%%%%%%
 
+TFRdiff
 
 % Store the powscptrm for easy access.
 pows_alpha = freqdesc_alpha.powspctrm;

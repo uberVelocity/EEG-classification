@@ -1,3 +1,4 @@
+% Generates multiplots.
 addpath('C:\Users\redth\Documents\University\Bachelor\git\bachelor-project');
 cfg = [];
 cfg.baseline = [];

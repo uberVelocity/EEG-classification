@@ -1,3 +1,6 @@
+% Computes false/true positive/negative rates for anger audio classification
+% technique based on amplitude.
+
 [y,Fs] = audioread("challengerdefender1.MOV");  % Read audio file.
 y = y(:, 1);  % Reduce data to half since we do not have two channels.
 cpy = y;  % Copy data for safe-keeping.
@@ -139,12 +142,6 @@ manual_times_1a_int = [254, 363, 396, 528, 551, 593, 690];
 manual_times_2_int = [280, 292, 340, 442, 588, 605];
 manual_times_3_int = [398, 523, 588];
 
-% Account for +-2 seconds by generating vector of values found in initial
-% vector +- 2 seconds.
-%generated_manual_times_1a_int = inrange2(manual_times_1a_int);
-%generated_manual_times_2_int = inrange2(manual_times_2_int);
-%generated_manual_times_3_int = inrange2(manual_times_3_int);
-
 % Check whether the values that the program found correspond to the values
 % that we found.
 matching_times_1a_int = ismember(manual_times_1a_int, fix(sigtimes));
@@ -179,11 +176,6 @@ total_results = ismember(1:fix(max(t)), fix(sigtimes));
 totalcnt = sum(total_results);
 disp("total significant points:");
 disp(sigcnt);
-
-% Label as significant the generated +-2 second values.
-%for index = 1:length(generated_manual_times_1a_int)
-%    total_results(generated_manual_times_1a_int(index)) = 1;
-%end
 
 % Compute true positives.
 tp = 0;
@@ -226,16 +218,6 @@ end
 disp("true negatives");
 disp(tn);
 
-% IMPORTANT: We are comparing whether the values that we have found to be
-% ANGER are found by the program to be AROUSAL. Since anger is a subset of
-% arousal, a value found by the program to be arousal that is not found in
-% our manual_times vector does not constitute as a false positive of the
-% solution, since it still may be anger. It constitutes as a false positive
-% only when we can determine by means of EEG that the brian activity does
-% not correspond to an angry emotion within that specified time.
-
-% FP1 FP2 - Indices: 1, 2
-% F3 F4 - Indices: 4, 6
 k = 0;
 figure(10);
 c = 0.0;
@@ -245,38 +227,3 @@ for i = 1:620
    c = data_iccleanedA.trial{1,i};
    plot(c(1,:));
 end
-
-% Compute oscillatory power for the challenger in video 1. Look at 
-% alpha (8:12), beta(12.5:30) and theta(4:7) waves 
-cfg = [];
-cfg.method = 'mtmconvol';
-cfg.taper = 'dpss';
-cfg.tapsmofrq = 2;
-% cfg.channel = 'Fp1_B';
-cfg.output = 'pow';
-cfg.trials = 'trials';
-cfg.keeptrials = 'yes';
-cfg.foi = [4:50];
-cfg.t_ftimwin = ones(length(cfg.foi),1).*0.5;
-cfg.toi = [-0.5:0.05:1];
-challenger1 = ft_freqanalysis(cfg,data_iccleanedB);
-TFRhigh = ft_freqanalysis(cfg,hpdat);
-
-cfg = [];
-cfg.baselinetype = 'absolute';
-cfg.showlabels = 'yes';
-cfg.layout = 'easycapM25.mat';
-cfg.showoutline = 'yes';
-ft_multiplotTFR(cfg,challenger1);
-
-
-TFRhigh = ft_freqanalysis(cfg,hpdat);
-cfg = [];
-cfg.baseline = [];
-cfg.baselinetype = 'absolute';
-cfg.showlabels = 'yes';
-cfg.showoutline = 'yes';
-
-
-
-

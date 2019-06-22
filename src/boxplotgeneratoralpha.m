@@ -1,3 +1,6 @@
+% Generates boxplots for channels at alpha-frequency between experienced
+% and beginner monks.
+
 addpath('C:\Users\redth\Documents\University\Bachelor\git\bachelor-project\data_files\');
 load('exp_alpha.mat');
 load('exp_beta.mat');

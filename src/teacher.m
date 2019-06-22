@@ -1,3 +1,4 @@
+% Useful reference functions from assignments.
 cfg = [];
 cfg.method = 'mtmconvol';
 cfg.taper = 'dpss';

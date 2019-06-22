@@ -1,3 +1,6 @@
+% Helper script for converting all debates into one continuous debate using
+% cell arrays. Each debate is concatenated together.
+
 data2 = data_iccleanedB;
 % Transfer trials and times from data2 to data3.
 k = 1;

@@ -1,5 +1,7 @@
 function [tfr, cfg] = fieldanalfn(freq, data)
-%FIELDANALFN Computes oscillatory power of data given a wavelength.
+% Computes oscillatory power of data given a wavelength. Used in order to
+% test results of different cfg's with different parameters set up. Used as
+% a `cfg` reference for computing the final oscillatory power.
 cfg = [];
 cfg.output = 'pow';
 cfg.channel = 'all';

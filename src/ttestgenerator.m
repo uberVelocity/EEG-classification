@@ -1,3 +1,8 @@
+% Computes a t-test between two data sets. Since a linear-mixed-effects
+% model is more robust as it does not require equal sample sizes and also
+% takes into account random effects present between observations of
+% debates, this script is no longer used.
+
 % Compare every channel by applying a t-test between exp and non-exp monks.
 load('final_peace_beginner_alpha');
 load('final_anger_beginner_alpha');
