@@ -163,10 +163,52 @@ freqdesc_alpha_exp.breal = angry_beginner_beta_arr;
 freqdesc_alpha_exp.treal = [];
 freqdesc_alpha_exp.treal = angry_beginner_theta_arr;
 
+angry_experienced_alpha_arr = table2array(angryExperiencedAlpha);
+angry_experienced_alpha_arr = angry_experienced_alpha_arr';
+angry_experienced_beta_arr = table2array(angryExperiencedBeta);
+angry_experienced_beta_arr = angry_experienced_beta_arr';
+angry_experienced_theta_arr = table2array(angryExperiencedTheta);
+angry_experienced_theta_arr = angry_experienced_theta_arr';
+
+freqdesc_alpha_exp.aexp = [];
+freqdesc_alpha_exp.aexp = angry_experienced_alpha_arr;
+freqdesc_alpha_exp.bexp = [];
+freqdesc_alpha_exp.bexp = angry_experienced_beta_arr;
+freqdesc_alpha_exp.texp = [];
+freqdesc_alpha_exp.texp = angry_experienced_theta_arr;
+
+nonangry_experienced_alpha_arr = table2array(nonangryExperiencedAlpha);
+nonangry_experienced_alpha_arr = nonangry_experienced_alpha_arr';
+nonangry_experienced_beta_arr = table2array(nonangryExperiencedBeta);
+nonangry_experienced_beta_arr = nonangry_experienced_beta_arr';
+nonangry_experienced_theta_arr = table2array(nonangryExperiencedTheta);
+nonangry_experienced_theta_arr = nonangry_experienced_theta_arr';
+
+freqdesc_alpha_exp.aexpp = [];
+freqdesc_alpha_exp.aexpp = nonangry_experienced_alpha_arr;
+freqdesc_alpha_exp.bexpp = [];
+freqdesc_alpha_exp.bexpp = nonangry_experienced_beta_arr;
+freqdesc_alpha_exp.texpp = [];
+freqdesc_alpha_exp.texpp = nonangry_experienced_theta_arr;
+
 cfg = [];
-cfg.zparam = 'brealp';
+cfg.zparam = 'aexpp';
 cfg.layout = 'elec1010B.lay';
 ft_topoplotER(cfg, freqdesc_alpha_exp);
+
+save('nonangry_beginner_alpha_arr');
+save('nonangry_beginner_beta_arr');
+save('nonangry_beginner_theta_arr');
+save('nonangry_experienced_alpha_arr');
+save('nonangry_experienced_beta_arr');
+save('nonangry_experienced_theta_arr');
+
+save('angry_beginner_alpha_arr');
+save('angry_beginner_beta_arr');
+save('angry_beginner_theta_arr');
+save('angry_experienced_alpha_arr');
+save('angry_experienced_beta_arr');
+save('angry_experienced_theta_arr');
 
 
 

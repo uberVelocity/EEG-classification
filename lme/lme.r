@@ -79,6 +79,7 @@ final_data_clean_experienced = final_data_clean[1:72406, 1:99];
 
 # convert cell array into matrix
 final_data_matrix_beginners = as.matrix(sapply(final_data_clean_beginners, as.numeric));
+final_data_matrix_experienced = as.matrix(sapply(final_data_clean_experienced, as.numeric));
 
 # split beginners by frequency
 # init alpha matrix
@@ -154,10 +155,7 @@ for (column in 1:32) {
   final_data_clean_beginners_anger_theta[, column] <- final_data_matrix_beginners[which(final_data_clean_beginners$anger == 1), column+67];
 }
 ##########################################################################
-
 # save clean beginner non-angry alpha
-
-
 
 final_data_clean_beginners_peace_alpha = matrix(nrow = 80055, ncol = 32);
 final_data_clean_beginners_peace_beta = matrix(nrow = 80055, ncol = 32);
@@ -168,6 +166,27 @@ for (column in 1:32) {
   final_data_clean_beginners_peace_beta[, column] <- final_data_matrix_beginners[which(final_data_clean_beginners$anger == 0), column+35];
   final_data_clean_beginners_peace_theta[, column] <- final_data_matrix_beginners[which(final_data_clean_beginners$anger == 0), column+67];
 }
+###########################################################
+
+final_data_clean_experienced_anger_alpha = matrix(nrow = 1701, ncol = 32);
+final_data_clean_experienced_anger_beta = matrix(nrow = 1701, ncol = 32);
+final_data_clean_experienced_anger_theta = matrix(nrow = 1701, ncol = 32);
+
+for (column in 1:32) {
+  final_data_clean_experienced_anger_alpha[, column] <- final_data_matrix_experienced[which(final_data_clean_experienced$anger == 1), column + 3];
+  final_data_clean_experienced_anger_beta[, column] <- final_data_matrix_experienced[which(final_data_clean_experienced$anger == 1), column + 35];
+  final_data_clean_experienced_anger_theta[, column] <- final_data_matrix_experienced[which(final_data_clean_experienced$anger == 1), column + 67];
+}
+
+final_data_clean_experienced_nonanger_alpha = matrix(nrow = 70705, ncol = 32);
+final_data_clean_experienced_nonanger_beta = matrix(nrow = 70705, ncol = 32);
+final_data_clean_experienced_nonanger_theta = matrix(nrow = 70705, ncol = 32);
+
+for (column in 1:32) {
+  final_data_clean_experienced_nonanger_alpha[, column] <- final_data_matrix_experienced[which(final_data_clean_experienced$anger == 0), column + 3];
+  final_data_clean_experienced_nonanger_beta[, column] <- final_data_matrix_experienced[which(final_data_clean_experienced$anger == 0), column + 35];
+  final_data_clean_experienced_nonanger_theta[, column] <- final_data_matrix_experienced[which(final_data_clean_experienced$anger == 0), column + 67];
+}
 
 # save matrices
 write.csv(final_data_clean_beginners_anger_alpha, file = "angryBeginnersAlpha.csv");
@@ -177,6 +196,15 @@ write.csv(final_data_clean_beginners_anger_theta, file = "angryBeginneresTheta.c
 write.csv(final_data_clean_beginners_peace_alpha, file = "nonangryBeginnersAlpha.csv");
 write.csv(final_data_clean_beginners_peace_beta, file = "nonangryBeginnersBeta.csv");
 write.csv(final_data_clean_beginners_peace_theta, file = "nonangryBeginnersTheta.csv");
+
+write.csv(final_data_clean_experienced_anger_alpha, file = "angryExperiencedAlpha.csv");
+write.csv(final_data_clean_experienced_anger_beta, file = "angryExperiencedBeta.csv");
+write.csv(final_data_clean_experienced_anger_theta, file = "angryExperiencedTheta.csv");
+
+write.csv(final_data_clean_experienced_nonanger_alpha, file = "nonangryExperiencedAlpha.csv");
+write.csv(final_data_clean_experienced_nonanger_beta, file = "nonangryExperiencedBeta.csv");
+write.csv(final_data_clean_experienced_nonanger_theta, file = "nonangryExperiencedTheta.csv");
+
 boxplot(`alpha 1` ~ isExp*anger, data = final_data_clean, outline = FALSE);
 
 final_data_clean.model.alpha = lmer(`alpha 1` ~ isExp*anger + (1|id), data = final_data_clean);
