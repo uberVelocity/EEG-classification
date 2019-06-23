@@ -73,6 +73,110 @@ final_data_clean$id <- as.factor(final_data_clean$id);
 final_data_clean$anger <- as.factor(final_data_clean$anger);
 final_data_clean$isExp <- as.factor(final_data_clean$isExp);
 
+# Split beginners from experienced
+final_data_clean_beginners = final_data_clean[72407:length(final_data_clean$isExp), 1:99];
+final_data_clean_experienced = final_data_clean[1:72406, 1:99];
+
+# convert cell array into matrix
+final_data_matrix_beginners = as.matrix(sapply(final_data_clean_beginners, as.numeric));
+
+# split beginners by frequency
+# init alpha matrix
+final_data_clean_beginners_alpha = matrix(nrow = length(final_data_clean_beginners$`alpha 1`), ncol = 32);
+
+# save clean beginner alpha as matrix
+for (column in 1:32) {
+  final_data_clean_beginners_alpha[, column] <- final_data_matrix_beginners[, column+3];
+}
+
+# init beta matrix
+final_data_clean_beginners_beta = matrix(nrow = length(final_data_clean_beginners$`beta 1`), ncol = 32);
+
+# save clean beginner beta as matrix
+for (column in 1:32) {
+  final_data_clean_beginners_beta[, column] <- final_data_matrix_beginners[, column+35];
+}
+
+# init theta matrix
+final_data_clean_beginners_theta = matrix(nrow = length(final_data_clean_beginners$`theta 1`), ncol = 32);
+
+# save clean beginner theta as matrix
+for (column in 1:32) {
+  final_data_clean_beginners_theta[, column] <- final_data_matrix_beginners[, column+67];
+}
+
+# init clean beginner anger alpha
+final_data_clean_beginners_anger_alpha = matrix(nrow = 2150, ncol = 32);
+
+# save clean beginner anger alpha as matrix
+for (column in 1:32) {
+  final_data_clean_beginners_anger_alpha[, column] <- final_data_matrix_beginners[which(final_data_clean_beginners$anger == 1), column+3];
+}
+
+# init clean beginner anger beta
+final_data_clean_beginners_anger_beta = matrix(nrow = 2150, ncol = 32);
+
+# save clean beginner anger beta as matrix
+for (column in 1:32) {
+  final_data_clean_beginners_anger_beta[, column] <- final_data_matrix_beginners[which(final_data_clean_beginners$anger == 1), column + 35];
+}
+
+# init clean beginner anger theta
+final_data_clean_beginners_anger_theta = matrix(nrow = 2150, ncol = 32);
+
+# save clean beginner anger theta as matrix
+for (column in 1:32) {
+  final_data_clean_beginners_anger_theta[, column] <- final_data_matrix_beginners[which(final_data_clean_beginners$anger == 1), column+67];
+}
+
+########################################################################
+# init clean beginner anger alpha 
+final_data_clean_beginners_anger_alpha = matrix(nrow = 2150, ncol = 32);
+
+# save clean beginner anger alpha as matrix
+for (column in 1:32) {
+  final_data_clean_beginners_anger_alpha[, column] <- final_data_matrix_beginners[which(final_data_clean_beginners$anger == 1), column+3];
+}
+
+# init clean beginner anger beta
+final_data_clean_beginners_anger_beta = matrix(nrow = 2150, ncol = 32);
+
+# save clean beginner anger beta as matrix
+for (column in 1:32) {
+  final_data_clean_beginners_anger_beta[, column] <- final_data_matrix_beginners[which(final_data_clean_beginners$anger == 1), column + 35];
+}
+
+# init clean beginner anger theta
+final_data_clean_beginners_anger_theta = matrix(nrow = 2150, ncol = 32);
+
+# save clean beginner anger theta as matrix
+for (column in 1:32) {
+  final_data_clean_beginners_anger_theta[, column] <- final_data_matrix_beginners[which(final_data_clean_beginners$anger == 1), column+67];
+}
+##########################################################################
+
+# save clean beginner non-angry alpha
+
+
+
+final_data_clean_beginners_peace_alpha = matrix(nrow = 80055, ncol = 32);
+final_data_clean_beginners_peace_beta = matrix(nrow = 80055, ncol = 32);
+final_data_clean_beginners_peace_theta = matrix(nrow = 80055, ncol = 32);
+
+for (column in 1:32) {
+  final_data_clean_beginners_peace_alpha[, column] <- final_data_matrix_beginners[which(final_data_clean_beginners$anger == 0), column+3];
+  final_data_clean_beginners_peace_beta[, column] <- final_data_matrix_beginners[which(final_data_clean_beginners$anger == 0), column+35];
+  final_data_clean_beginners_peace_theta[, column] <- final_data_matrix_beginners[which(final_data_clean_beginners$anger == 0), column+67];
+}
+
+# save matrices
+write.csv(final_data_clean_beginners_anger_alpha, file = "angryBeginnersAlpha.csv");
+write.csv(final_data_clean_beginners_anger_beta, file = "angryBeginnersBeta.csv");
+write.csv(final_data_clean_beginners_anger_theta, file = "angryBeginneresTheta.csv");
+
+write.csv(final_data_clean_beginners_peace_alpha, file = "nonangryBeginnersAlpha.csv");
+write.csv(final_data_clean_beginners_peace_beta, file = "nonangryBeginnersBeta.csv");
+write.csv(final_data_clean_beginners_peace_theta, file = "nonangryBeginnersTheta.csv");
 boxplot(`alpha 1` ~ isExp*anger, data = final_data_clean, outline = FALSE);
 
 final_data_clean.model.alpha = lmer(`alpha 1` ~ isExp*anger + (1|id), data = final_data_clean);
@@ -110,10 +214,6 @@ anova(final_data_clean_experienced.beta);
 final_data_clean_experienced.theta = lmer(`theta 2` ~ anger + (1|id), data = final_data_clean_experienced);
 summary(final_data_clean_experienced.theta);
 anova(final_data_clean_experienced.theta);
-
-# Split beginners from experienced
-final_data_clean_beginners = final_data_clean[72407:length(final_data_clean$isExp), 1:99];
-final_data_clean_experienced = final_data_clean[1:72406, 1:99];
 
 final_anger_experienced_sample = final_data_clean_experienced[sample(which(final_data_clean_experienced$anger == 1), 2150),];
 final_peace_experienced_sample = final_data_clean_experienced[sample(which(final_data_clean_experienced$anger == 0), 2150),];

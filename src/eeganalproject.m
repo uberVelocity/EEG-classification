@@ -58,14 +58,14 @@ load('debate_d93c94l_times_peace_defender');
 frequency = 'alpha';
 
 % Compute power oscillation of EEG data.
-[TFRiccleanedB_alpha, cfg] = fieldanalfn(alpha, experienced); 
+[TFRiccleanedB_alpha, cfg] = fieldanalfn(alpha, data_iccleanedB); 
 [freqdesc_alpha_exp] = ft_freqdescriptives(cfg, TFRiccleanedB_alpha);
 
-[TFRiccleanedB_beta, cfg] = fieldanalfn(beta, experienced); 
+[TFRiccleanedB_beta, cfg] = fieldanalfn(beta, data_iccleanedB); 
 [freqdesc_beta_exp] = ft_freqdescriptives(cfg, TFRiccleanedB_beta);
 
-[TFRiccleanedB_theta, cfg] = fieldanalfn(theta, experienced);
-[freqdesc_theta_theta] = ft_freqdescriptives(cfg, TFRiccleanedB_theta);
+[TFRiccleanedB_theta, cfg] = fieldanalfn(theta, data_iccleanedB);
+[freqdesc_theta_exp] = ft_freqdescriptives(cfg, TFRiccleanedB_theta);
 
 % Compute freq descriptives of result.
 noTrials = size(data_iccleanedB.trial, 2);
@@ -134,4 +134,40 @@ for index = 1:length(debate_2_times_defender)
     squeezedValuesDe = squeezedValuesDe2(:);
     %resultmachineinput(squeezedValuesCh, squeezedValuesDe, num2str(index), debate_name, frequency, electro);
 end
+
+nonangry_beginner_alpha_arr = table2array(nonangryBeginnersAlpha);
+nonangry_beginner_alpha_arr = nonangry_beginner_alpha_arr';
+nonangry_beginner_beta_arr = table2array(nonangryBeginnersBeta);
+nonangry_beginner_beta_arr = nonangry_beginner_beta_arr';
+nonangry_beginner_theta_arr = table2array(nonangryBeginnersTheta);
+nonangry_beginner_theta_arr = nonangry_beginner_theta_arr';
+
+freqdesc_alpha_exp.arealp = [];
+freqdesc_alpha_exp.arealp = nonangry_beginner_alpha_arr;
+freqdesc_alpha_exp.brealp = [];
+freqdesc_alpha_exp.brealp = nonangry_beginner_beta_arr;
+freqdesc_alpha_exp.trealp = [];
+freqdesc_alpha_exp.trealp = nonangry_beginner_theta_arr;
+
+angry_beginner_alpha_arr = table2array(angryBeginnersAlpha);
+angry_beginner_alpha_arr = angry_beginner_alpha_arr';
+angry_beginner_beta_arr = table2array(angryBeginnersBeta);
+angry_beginner_beta_arr = angry_beginner_beta_arr';
+angry_beginner_theta_arr = table2array(angryBeginnersTheta);
+angry_beginner_theta_arr = angry_beginner_theta_arr';
+
+freqdesc_alpha_exp.areal = [];
+freqdesc_alpha_exp.areal = angry_beginner_alpha_arr;
+freqdesc_alpha_exp.breal = [];
+freqdesc_alpha_exp.breal = angry_beginner_beta_arr;
+freqdesc_alpha_exp.treal = [];
+freqdesc_alpha_exp.treal = angry_beginner_theta_arr;
+
+cfg = [];
+cfg.zparam = 'brealp';
+cfg.layout = 'elec1010B.lay';
+ft_topoplotER(cfg, freqdesc_alpha_exp);
+
+
+
 
