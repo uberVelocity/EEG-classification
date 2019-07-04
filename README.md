@@ -1,4 +1,4 @@
-# Classification of anger based on EEG data using Support-Vector Machines.
+# Classification of anger based on EEG data using Support-Vector Machines - Bachelor Project
 The following repository serves as a hub for the code used during the bachelor project. The repository holds every line used to preprocess and analyze EEG data (Matlab), all statistical tests (R), and classifiers (Python + [scikit-learn](https://scikit-learn.org/stable/modules/svm.html)). The rest of this document served as a notepad as the project progressed. It is filled with items that were important to us along the way and it shall not be changed until the project is archived.
 
 Every script contains explanatory comments to guide the reader through the code.
