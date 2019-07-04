@@ -1,15 +1,7 @@
 # Bachelor project 
+The following repository serves as a hub for the code used during the bachelor project. The repository holds every line used to preprocess and analyze EEG data (Matlab), all statistical tests (R), and classifiers (Python + [scikit-learn](https://scikit-learn.org/stable/modules/svm.html)). The rest of this document served as a notepad as the project progressed. It is filled with items that were important to us along the way and it shall not be changed until the project is archived.
 
-## NOTES:
-Theta is usually a good descriptor of anger consistently throughout the trials.
-
-## TODO:
-1. Create multiplot topology of alpha, theta, and beta oscillatory power 
-of 32-channels for: {beginners}, {experienced}. This implies 
-transforming the final_data_beginner and final_data_experienced into 
-**ft_freqdesc structures**.
-- `cumtapcnt` does not need to be included
-2. Compute t-test again excluding outliers.
+Every script contains explanatory comments to guide the reader through the code.
 
 ## Linear mixed effects model
 Two things always need to be done to validify a Linear mixed effects model:
@@ -28,8 +20,9 @@ another with respect to e.g. variance.
 The plot described below checks for both -> Two clouds are formed depicting differences between male and female.
 In our case, we are interested in (hopefully, if there is an effect between experienced and non-experienced) noticing two distinct clouds relating experienced and non-experienced monks.
 They are compared in terms of interbrain synchronizations at different channels: FP1, FP2, F3-F4, and T8-T7 electrode differences for anger moments. **A linear trend must not be present, or any pattern for that matter.** Relatively higher differences should be noticed for beginner monks than for experienced monks. Not only that but the frequency of these differences should be higher in beginner than in experienced monks.
+
 ```R
-plot(fitted(politeness.model), residuals(politeness.model))
+plot(fitted(data.model), residuals(data.model))
 ```
 This will check the intensity of anger, meaning that higher differences will account for a stronger likelihood that
 the anger moment event indicates anger. Bare in mind that ultimately we are interested in seeing whether beginner monks
@@ -41,16 +34,14 @@ interested in. You can think of this as a kind of “sanity check” in which we
 whether our fixed effects have any merit at all. The null model below has a single
 fixed effect “1”.
 ```R
-politeness.null = lmer(frequency ~ 1 + (1|subject) + (1|scenario), data=politeness)
+data.null = lmer(channel ~ 1 + (1|debate_id), data=debate_data)
 ```
 Then, we perform a so-called likelihood ratio test with an ANOVA.
 We simply put the test model as one argument and the null model as
 the other:
 
-
-
 ```R
-anova(politeness.model, politeness.null)
+anova(data.model, data.null)
 ```
 If the likelihood ratio test would not reach significance, you should reject your
 results and not report them.
@@ -66,10 +57,10 @@ Normality, homogeneity, and a null model comparison needs to be created and comp
 ### Combating times
 Since we know how many trials each debate has and we know the trial that we want to get from a certain debatee, we need to add to the time that we find the amount of trials that have come before the debate in question. So, if we're intersted in time 10 of debate 2 and debate 1 has 620 trials, then we should investigate trial 630 of the concatenated string of debates.
 
-## Potential Extension
+## Potential Extension 1 - Emotion interval
 **After** getting non-experienced results of EEG analysis, then maybe take 1 second interval times of interest, so half a trial. Recommendation from teacher as occurrence of anger may dissipate quickly. This works under the assumption that the statement is true and under the assumption that we have sufficiently accurate times for the difference to be meaningful. 
 
-## Extension app
+## Potential Extension 2 - App
 The app would give you an option to choose what type of debate to run investigations on. Based on the times that we have chosen, the app would run an oscillatory power test on the debate at a frequency given by the user. It is an interface that implements the methodology that we have used. If implementing multiple classifiers, an option to train and test different classifiers could be implemented using different portions of the data.
 
 ## INSTRUCTIONS
@@ -110,6 +101,9 @@ Better solution is to:
 4. If the values are false, add in a new vector at a pointer whose value increments only in this if statement the value at the index position.
 ![](clap_intervals.png)
 When computing the average in order to normalize the data and compute its z-score, the clapping values should not be removed since that would shift the EEG data. Better is to give it a value which does not influence the loudness (0 probably but if clippings are also 0 values then we have a problem) and count how many there are. Subtract the number over which you divide by this counter to not count the claps in the average.
+
+## TODO:
+1. KNN to compare with SVM.
 
 #### Comparison between anger and non-anger moments of Channel FP1 for Alpha waves.
 ![](fp1anger.png)
