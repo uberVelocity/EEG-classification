@@ -105,6 +105,7 @@ When computing the average in order to normalize the data and compute its z-scor
 ## TODO:
 1. KNN to compare with SVM.
 2. Cross-validation technique using [K-folds](https://scikit-learn.org/stable/modules/cross_validation.html) approach.
+3. Normalize within participant by: `power = (power - mean) /sd`
 
 #### Comparison between anger and non-anger moments of Channel FP1 for Alpha waves.
 ![](fp1anger.png)
