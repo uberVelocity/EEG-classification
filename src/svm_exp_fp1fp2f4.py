@@ -11,17 +11,17 @@ from scipy import stats
 # (predicted by literature).
 
 # Read dataset to pandas dataframe.
-experienced = pd.read_csv("/home/merkel/Downloads/fd_experienced", index_col = 0)
+beginners = pd.read_csv("/home/merkel/Downloads/fd_beginners", index_col = 0)
 
 # drop NaN values
-experienced = experienced.dropna(axis = 0)
+beginners = beginners.dropna(axis = 0)
 
 # save all anger moments
-anger = experienced.loc[experienced['anger'] == 1]
+anger = beginners.loc[beginners['anger'] == 1]
 print(anger.shape)
 
 # save all non-anger momnets
-nonanger = experienced.loc[experienced['anger'] == 0]
+nonanger = beginners.loc[beginners['anger'] == 0]
 
 # sample 1217 rows (number of anger moments)
 nonanger_sample = nonanger.sample(n = 1217)
@@ -39,16 +39,12 @@ print(x)
 # Save only anger class.
 y = data['anger']
 
-from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3)
-
 from sklearn.svm import SVC
+svclassifier = SVC(kernel = 'poly', degree = 1)
 
-svclassifier = SVC(kernel = 'linear')
-svclassifier.fit(x_train, y_train)
+# Perform K-fold cross-validation with 10 folds.
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(svclassifier, x, y, cv = 10)
 
-y_pred = svclassifier.predict(x_test)
-
-from sklearn.metrics import classification_report, confusion_matrix
-print(confusion_matrix(y_test, y_pred))
-print(classification_report(y_test, y_pred))    
+# Print accuracy scores.
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
